@@ -1,0 +1,16 @@
+{
+    "name": "kazist/withdraws",
+    "description": "Kazist Withdraws Manager.",
+    "keywords": ["kazist", "withdraw manager"],
+    "homepage": "https://github.com/kazist/withdraws",
+    "license": "LGPL-3.0",
+    "version": "1.0.0",
+    "authors": [
+        {
+            "name": "Dedan Irungu",
+            "email": "info@emshyinnovate.com",
+            "homepage": "http://emshyinnovate.com",
+            "role": "Founder & Developer"
+        }
+    ]
+}

@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 
-namespace Finance\Masspays\Code\Models;
+namespace Withdraws\Masspays\Code\Models;
 
 defined('KAZIST') or exit('Not Kazist Framework');
 
@@ -40,14 +40,14 @@ class MasspaysModel extends BaseModel {
         $token = $this->request->request->get('token');
 
         $masspay_query = new Query();
-        $masspay_query->update('#__finance_masspay');
+        $masspay_query->update('#__withdraws_masspay');
         $masspay_query->where('token=:token');
         $masspay_query->setParameter('token', $token);
         $masspay_query->set('is_processed', '1');
         $masspay_query->execute();
 
         $withdraw_query = new Query();
-        $withdraw_query->update('#__finance_withdraws');
+        $withdraw_query->update('#__withdraws_withdraws');
         $withdraw_query->where('token=:token');
         $withdraw_query->setParameter('token', $token);
         $withdraw_query->set('paid_status', '1');
@@ -97,14 +97,14 @@ class MasspaysModel extends BaseModel {
         $email = new Email();
         $factory = new KazistFactory();
 
-        $masspay = $factory->getRecord('#__finance_masspay', 'fm', array('id=:id'), array('id' => $masspay_id));
+        $masspay = $factory->getRecord('#__withdraws_masspay', 'fm', array('id=:id'), array('id' => $masspay_id));
         $users = $factory->getRecord('#__users_users', 'uu', array('is_admin=:is_admin'), array('is_admin' => 1));
         $attachments = array($this->file_path);
 
         $tmp_array['gateway'] = $gateway;
         $tmp_array['masspay'] = $masspay;
 
-        $email->sendDefinedLayoutEmail('finance.masspay.generatefile', $users, $tmp_array, $attachments);
+        $email->sendDefinedLayoutEmail('withdraws.masspay.generatefile', $users, $tmp_array, $attachments);
     }
 
     public function saveMassPay($gateway, $unique_id) {
@@ -124,7 +124,7 @@ class MasspaysModel extends BaseModel {
         $data_obj->file = $this->web_path;
         $data_obj->max_limit = $gateway->file_limit;
 
-        return $factory->saveRecord('#__finance_masspay', $data_obj);
+        return $factory->saveRecord('#__withdraws_masspay', $data_obj);
     }
 
     public function processSingleWithdrawal($withdraw, $structure, $unique_id) {
@@ -152,7 +152,7 @@ class MasspaysModel extends BaseModel {
         $data_obj->id = $withdraw->id;
         $data_obj->token = $unique_id;
 
-        $factory->saveRecord('#__finance_withdraws', $data_obj);
+        $factory->saveRecord('#__withdraws_withdraws', $data_obj);
     }
 
     public function getTotalWithdraws($gateway_id) {
@@ -162,7 +162,7 @@ class MasspaysModel extends BaseModel {
 
         $query = new Query();
         $query->select('COUNT(*) as total');
-        $query->from('#__finance_withdraws', 'fg');
+        $query->from('#__withdraws_withdraws', 'fg');
         $query->where('(fg.token=\'\' OR fg.token IS NULL)');
         $query->andWhere('(fg.is_canceled=0 OR fg.is_canceled IS NULL)');
         if ($gateway_id) {
@@ -186,7 +186,7 @@ class MasspaysModel extends BaseModel {
 
         $query = new Query();
         $query->select('fg.*');
-        $query->from('#__finance_withdraws', 'fg');
+        $query->from('#__withdraws_withdraws', 'fg');
         $query->where('(fg.token=\'\' OR fg.token IS NULL)');
         $query->andWhere('(fg.is_canceled=0 OR fg.is_canceled IS NULL)');
         if ($gateway_id) {
@@ -211,7 +211,7 @@ class MasspaysModel extends BaseModel {
 
         $query = new Query();
         $query->select('fg.*');
-        $query->from('#__finance_gateways', 'fg');
+        $query->from('#__withdraws_gateways', 'fg');
         $query->where('fg.can_withdraw=1');
 
         $records = $query->loadObjectList();
@@ -230,7 +230,7 @@ class MasspaysModel extends BaseModel {
         $month = date('M');
         $date = date('d');
 
-        $this->relative_path = 'uploads/finance/masspay/' . $year . '/' . $month . '/' . $date . '/';
+        $this->relative_path = 'uploads/withdraws/masspay/' . $year . '/' . $month . '/' . $date . '/';
         $this->web_path = $this->relative_path . $file_name . $unique_id . '.' . $file_ext;
         $this->absolute_path = rtrim(JPATH_ROOT, '/') . '/' . $this->relative_path;
         $this->file_path = rtrim(JPATH_ROOT, '/') . '/' . $this->web_path;
@@ -250,7 +250,7 @@ class MasspaysModel extends BaseModel {
 
         $check_arr = array('id' => $id);
 
-        $masspay = $factory->getRecord('#__finance_masspay', 'fm', array('id=:id'), $check_arr);
+        $masspay = $factory->getRecord('#__withdraws_masspay', 'fm', array('id=:id'), $check_arr);
 
 
 
@@ -277,7 +277,7 @@ class MasspaysModel extends BaseModel {
             exit;
         } else {
             $factory->enqueueMessage('Masspay Record Not Found.');
-            $factory->redirect('finance.masspay.masspay');
+            $factory->redirect('withdraws.masspay.masspay');
         }
     }
 

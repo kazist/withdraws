@@ -2,12 +2,12 @@
     "frontend": [{
             "title": "Candidate Analyzer",
             "description": "Candidate Analyzer",
-            "controller": "Finance\\Masspay\\Code\\Controllers\\MasspayController::generatemasspayAction",
-            "unique_name": "finance.masspay.generatemasspay",
-            "route": "finance/masspay/generatemasspay",
+            "controller": "Withdraws\\Masspay\\Code\\Controllers\\MasspayController::generatemasspayAction",
+            "unique_name": "withdraws.masspay.generatemasspay",
+            "route": "withdraws/masspay/generatemasspay",
             "permissions": "can_view, can_viewown",
             "arguments": {},
-            "keywords": "finance, masspay",
+            "keywords": "withdraws, masspay",
             "priority": "0.5",
             "changefreq": "weekly",
             "login_required": 0
@@ -16,9 +16,9 @@
     "backend": [{
             "title": "General Tasks",
             "description": "General Tasks.",
-            "controller": "Finance\\Masspay\\Code\\Controllers\\Admin\\MasspayController::taskAction",
-            "unique_name": "admin.finance.masspay.task",
-            "route": "admin/finance/masspay/task",
+            "controller": "Withdraws\\Masspay\\Code\\Controllers\\Admin\\MasspayController::taskAction",
+            "unique_name": "admin.withdraws.masspay.task",
+            "route": "admin/withdraws/masspay/task",
             "permissions": "can_add, can_write, can_writeown",
             "arguments": "",
             "keywords": "masspay, task",
@@ -32,10 +32,10 @@
         }, {
             "title": "Masspay List",
             "description": "Management of Masspay.",
-            "controller": "Finance\\Masspay\\Code\\Controllers\\Admin\\MasspayController::indexAction",
+            "controller": "Withdraws\\Masspay\\Code\\Controllers\\Admin\\MasspayController::indexAction",
             "permissions": "can_view, can_viewown",
-            "unique_name": "admin.finance.masspay",
-            "route": "admin/finance/masspay",
+            "unique_name": "admin.withdraws.masspay",
+            "route": "admin/withdraws/masspay",
             "arguments": "",
             "keywords": "masspay, list",
             "priority": "0.5",
@@ -48,9 +48,9 @@
         }, {
             "title": "Add Masspay ",
             "description": "Add Masspay  .",
-            "controller": "Finance\\Masspay\\Code\\Controllers\\Admin\\MasspayController::addAction",
-            "unique_name": "admin.finance.masspay.add",
-            "route": "admin/finance/masspay/add",
+            "controller": "Withdraws\\Masspay\\Code\\Controllers\\Admin\\MasspayController::addAction",
+            "unique_name": "admin.withdraws.masspay.add",
+            "route": "admin/withdraws/masspay/add",
             "permissions": "can_add",
             "arguments": {},
             "keywords": "masspay, add",
@@ -64,9 +64,9 @@
         }, {
             "title": "Edit Masspay {{ item.name }}",
             "description": "Edit Masspay {{ item.name }}.",
-            "controller": "Finance\\Masspay\\Code\\Controllers\\Admin\\MasspayController::editAction",
-            "unique_name": "admin.finance.masspay.edit",
-            "route": "admin/finance/masspay/edit/{id}",
+            "controller": "Withdraws\\Masspay\\Code\\Controllers\\Admin\\MasspayController::editAction",
+            "unique_name": "admin.withdraws.masspay.edit",
+            "route": "admin/withdraws/masspay/edit/{id}",
             "permissions": "can_add, can_write, can_writeown",
             "arguments": {
                 "id": null
@@ -82,9 +82,9 @@
         }, {
             "title": "Masspay Detail: {{ item.name }}",
             "description": "Masspay Detail: {{ item.name }}",
-            "controller": "Finance\\Masspay\\Code\\Controllers\\Admin\\MasspayController::detailAction",
-            "unique_name": "admin.finance.masspay.detail",
-            "route": "admin/finance/masspay/detail/{id}",
+            "controller": "Withdraws\\Masspay\\Code\\Controllers\\Admin\\MasspayController::detailAction",
+            "unique_name": "admin.withdraws.masspay.detail",
+            "route": "admin/withdraws/masspay/detail/{id}",
             "permissions": "can_view, can_viewown",
             "arguments": {
                 "id": null
@@ -100,9 +100,9 @@
         }, {
             "title": "Masspay Delete: {{ item.name }}",
             "description": "Masspay Delete: {{ item.name }}",
-            "controller": "Finance\\Masspay\\Code\\Controllers\\Admin\\MasspayController::deleteAction",
-            "unique_name": "admin.finance.masspay.delete",
-            "route": "admin/finance/masspay/delete/{id}",
+            "controller": "Withdraws\\Masspay\\Code\\Controllers\\Admin\\MasspayController::deleteAction",
+            "unique_name": "admin.withdraws.masspay.delete",
+            "route": "admin/withdraws/masspay/delete/{id}",
             "permissions": "can_delete, can_deleteown",
             "arguments": {
                 "id": null
@@ -118,9 +118,9 @@
         }, {
             "title": "Masspay Save: {{ item.name }}",
             "description": "Masspay Save: {{ item.name }}",
-            "controller": "Finance\\Masspay\\Code\\Controllers\\Admin\\MasspayController::saveAction",
-            "unique_name": "admin.finance.masspay.save",
-            "route": "admin/finance/masspay/save",
+            "controller": "Withdraws\\Masspay\\Code\\Controllers\\Admin\\MasspayController::saveAction",
+            "unique_name": "admin.withdraws.masspay.save",
+            "route": "admin/withdraws/masspay/save",
             "permissions": "can_add, can_write, can_writeown",
             "arguments": {
                 "id": null
@@ -136,9 +136,9 @@
         }, {
             "title": "Masspay Complete Process: {{ item.name }}",
             "description": "Masspay Complete Proces: {{ item.name }}",
-            "controller": "Finance\\Masspay\\Code\\Controllers\\Admin\\MasspayController::completeprocessAction",
-            "unique_name": "admin.finance.masspay.completeprocess",
-            "route": "admin/finance/masspay/completeprocess",
+            "controller": "Withdraws\\Masspay\\Code\\Controllers\\Admin\\MasspayController::completeprocessAction",
+            "unique_name": "admin.withdraws.masspay.completeprocess",
+            "route": "admin/withdraws/masspay/completeprocess",
             "permissions": "can_add, can_write, can_writeown",
             "arguments": {
                 "id": null
@@ -154,9 +154,9 @@
         }, {
             "title": "Generate Masspay: {{ item.name }}",
             "description": "Generate Masspay: {{ item.name }}",
-            "controller": "Finance\\Masspay\\Code\\Controllers\\Admin\\MasspayController::generatemasspayAction",
-            "unique_name": "admin.finance.masspay.generatemasspay",
-            "route": "admin/finance/masspay/generatemasspay",
+            "controller": "Withdraws\\Masspay\\Code\\Controllers\\Admin\\MasspayController::generatemasspayAction",
+            "unique_name": "admin.withdraws.masspay.generatemasspay",
+            "route": "admin/withdraws/masspay/generatemasspay",
             "permissions": "can_add, can_write, can_writeown",
             "arguments": {
                 "id": null
@@ -172,9 +172,9 @@
         }, {
             "title": "Masspay Download File: {{ item.name }}",
             "description": "Masspay Download File: {{ item.name }}",
-            "controller": "Finance\\Masspay\\Code\\Controllers\\Admin\\MasspayController::downloadfileAction",
-            "unique_name": "admin.finance.masspay.downloadfile",
-            "route": "admin/finance/masspay/downloadfile",
+            "controller": "Withdraws\\Masspay\\Code\\Controllers\\Admin\\MasspayController::downloadfileAction",
+            "unique_name": "admin.withdraws.masspay.downloadfile",
+            "route": "admin/withdraws/masspay/downloadfile",
             "permissions": "can_add, can_write, can_writeown",
             "arguments": {
                 "id": null

@@ -1,13 +1,13 @@
 <?php
 
-namespace Finance\Masspay\Code\Tables;
+namespace Withdraws\Masspay\Code\Tables;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Masspay
  *
- * @ORM\Table(name="finance_masspay", indexes={@ORM\Index(name="created_by_index", columns={"created_by"}), @ORM\Index(name="modified_by_index", columns={"modified_by"})})
+ * @ORM\Table(name="withdraws_masspay", indexes={@ORM\Index(name="created_by_index", columns={"created_by"}), @ORM\Index(name="modified_by_index", columns={"modified_by"})})
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks
  */

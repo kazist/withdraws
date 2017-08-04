@@ -477,7 +477,7 @@
         }
     ],
     "primarykey": "id",
-    "table_name": "finance_masspay",
+    "table_name": "withdraws_masspay",
     "table_alias": "fm",
     "foreignkey": "",
     "renamedfields": "",
@@ -496,9 +496,9 @@
     "right_field": "",
     "query": {
         "from": {
-            "table": "Finance\\Masspay\\Code\\Tables\\Masspay",
+            "table": "Withdraws\\Masspay\\Code\\Tables\\Masspay",
             "alias": "fm",
-            "name": "#__finance_masspay"
+            "name": "#__withdraws_masspay"
         },
         "select": [
             "fm.id",

@@ -1,5 +1,5 @@
-Finance\Masspay\Code\Tables\Masspay:
-  table: finance_masspay
+Withdraws\Masspay\Code\Tables\Masspay:
+  table: withdraws_masspay
   type: entity
   id:
     id:

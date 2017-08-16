@@ -1,0 +1,10 @@
+{
+    "name": "withdraws",
+    "title": "User Avatar Listing",
+    "explanation": "User Avatar Listing",
+    "description": "User Avatar Listing",
+    "version": 1,
+    "icon": "assets\/withdraws\/addons\/withdraws\/icon.png",
+    "extension": "addon",
+    "path": "withdraws\/addons\/withdraws\/"
+}

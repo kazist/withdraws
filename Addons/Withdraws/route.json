@@ -1,0 +1,39 @@
+{
+    "backend": [{
+            "title": "Withdraws List",
+            "description": "Management of Withdraws.",
+            "controller": "Withdraws\\Addons\\Withdraws\\Controllers\\WithdrawsController::indexAction",
+            "permissions": "can_view, can_viewown",
+            "unique_name": "withdraws.addons.withdraws",
+            "route": "withdraws/addons/withdraws",
+            "arguments": "",
+            "keywords": "latest, withdraws, list, addons",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 0,
+            "roles": {
+                "SUPER_ADMIN": ["can_view", "can_viewown"],
+                "ADMIN": ["can_view", "can_viewown"],
+                "MODERATOR": ["can_view", "can_viewown"],
+                "USER": ["can_view", "can_viewown"]
+            }
+        }, {
+            "title": "Withdraws Setting List",
+            "description": "Management of Withdraws Setting.",
+            "controller": "Withdraws\\Addons\\Withdraws\\Controllers\\WithdrawsController::withdrawSettingAction",
+            "permissions": "can_view, can_viewown",
+            "unique_name": "withdraws.addons.withdrawsetting",
+            "route": "withdraws/addons/withdrawsetting",
+            "arguments": "",
+            "keywords": "latest, withdraws, list, addons",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 0,
+            "roles": {
+                "SUPER_ADMIN": ["can_view", "can_viewown"],
+                "ADMIN": ["can_view", "can_viewown"],
+                "MODERATOR": ["can_view", "can_viewown"],
+                "USER": ["can_view", "can_viewown"]
+            }
+        }]
+} 	

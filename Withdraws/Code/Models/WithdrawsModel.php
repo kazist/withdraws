@@ -137,7 +137,7 @@ class WithdrawsModel extends BaseModel {
 
         $query = new Query();
         $query->select('fg.*');
-        $query->from('#__withdraws_gateways', 'fg');
+        $query->from('#__payments_gateways', 'pg');
         $query->where('fg.id=:id');
         $query->setParameter('id', (int) $user->subscription->gateway_id);
         $record = $query->loadObject();
@@ -158,9 +158,9 @@ class WithdrawsModel extends BaseModel {
         $tmp_array = array();
 
         $query = new Query();
-        $query->select('fg.*');
-        $query->from('#__withdraws_gateways', 'fg');
-        $query->where('fg.published=1');
+        $query->select('pg.*');
+        $query->from('#__payments_gateways', 'pg');
+        $query->where('pg.published=1');
         $records = $query->loadObjectList();
 
         if (!empty($records)) {
@@ -182,7 +182,7 @@ class WithdrawsModel extends BaseModel {
 
         $query = new Query();
         $query->select('fg.*');
-        $query->from('#__withdraws_gateways', 'fg');
+        $query->from('#__payments_gateways', 'fg');
         $query->where('fg.id=:id');
         $query->setParameter('id', (int) $user->subscription->gateway_id);
         $records = $query->loadObjectList();

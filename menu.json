@@ -1,0 +1,22 @@
+{
+    "parent": "payments",
+    "menulist": [{
+            "title": "Withdraws",
+            "alias": "admin_withdraws_withdraws",
+            "url": "admin/withdraws/withdraws",
+            "icon": "fa fa-money",
+            "children": [{
+                    "title": "Transfers",
+                    "alias": "admin_withdraws_settings",
+                    "url": "admin/withdraws/settings",
+                    "icon": "fa fa-money",
+                    "children": []
+                }, {
+                    "title": "Masspay",
+                    "alias": "admin_withdraws_masspay",
+                    "url": "admin/withdraws/masspay",
+                    "icon": "fa fa-money",
+                    "children": []
+                }]
+        }]
+}

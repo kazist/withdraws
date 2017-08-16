@@ -1,0 +1,46 @@
+
+{{ set_assets('applications/Withdraws/Addons/Withdraws/assets/css/withdraws.css') }}
+
+<div class="withdraws">
+
+    <div class="table-responsive">
+        <table class="table table-condensed table-bordered">
+            <thead>
+                <tr>
+                    <th align="left">User</th>
+                    <th>Gateway</th>
+                    <th>Withdraw ID</th>
+                    <th>Accepted</th>
+                </tr>
+            </thead> 
+
+            <tbody>
+                {% if items|length>0 %}
+                    {% for item in items %}
+                        <tr>
+                            <td>{{ item.user_id_name }}</td>
+                            <td>{{ item.gateway_id_long_name }}</td>
+                            <td>{{ item.withdraw_id }}</td>
+                            <td> {% if item.is_valid %}
+                                <label class="label label-default">Yes</label>
+                            {% else %}
+                                <label class="label label-danger">No</label>
+                                {% endif %}
+                                </td>
+                                <td>
+                                    <a class="btn btn-primary btn-sm" href="{{ generate_url('withdraws.settings.edit',{'id':item.id}) }}">
+                                       <i class="fa fa-pencil"></i>
+                                        Edit
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                                {% endif %}
+                                </tbody>
+                            </table>
+
+                        </div>
+
+                        <div class="clearfix"></div>
+                        <br>
+                    </div>

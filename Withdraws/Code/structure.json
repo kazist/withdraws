@@ -191,7 +191,7 @@
                     "display_field": [
                         "long_name"
                     ],
-                    "join_table_name": "withdraws_gateways"
+                    "join_table_name": "payments_gateways"
                 },
                 "save": {
                     "index": ""
@@ -579,7 +579,7 @@
             {
                 "table": "Withdraws\\Gateways\\Code\\Tables\\Gateways",
                 "alias": "fg",
-                "name": "#__withdraws_gateways",
+                "name": "#__payments_gateways",
                 "on": "fw.gateway_id = fg.id"
             },
             {

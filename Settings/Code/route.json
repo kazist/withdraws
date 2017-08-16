@@ -1,0 +1,262 @@
+{
+    "frontend": [{
+            "title": "Withdraw Seting List",
+            "description": "Management of Withdraws Seting.",
+            "controller": "Withdraws\\Settings\\Code\\Controllers\\SettingsController::indexAction",
+            "permissions": "can_view, can_viewown",
+            "unique_name": "withdraws.settings",
+            "route": "withdraws/settings",
+            "arguments": "",
+            "keywords": "withdraw, list",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_viewown"],
+                "ADMIN": ["can_viewown"],
+                "MODERATOR": ["can_viewown"],
+                "USER": ["can_viewown"]
+            }
+        }, {
+            "title": "Add Withdraw Seting ",
+            "description": "Add Withdraw Seting .",
+            "controller": "Withdraws\\Settings\\Code\\Controllers\\SettingsController::addAction",
+            "unique_name": "withdraws.settings.add",
+            "route": "withdraws/settings/add",
+            "permissions": "can_add",
+            "arguments": {},
+            "keywords": "withdraw, add",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_add"],
+                "ADMIN": ["can_add"],
+                "MODERATOR": ["can_add"],
+                "USER": ["can_add"]
+            }
+        }, {
+            "title": "Edit Withdraw Seting {{ item.name }}",
+            "description": "Edit Withdraw Seting {{ item.name }}.",
+            "controller": "Withdraws\\Settings\\Code\\Controllers\\SettingsController::editAction",
+            "unique_name": "withdraws.settings.edit",
+            "route": "withdraws/settings/edit/{id}",
+            "permissions": "can_add, can_write, can_writeown",
+            "arguments": {
+                "id": null
+            },
+            "keywords": "withdraw, list, {{ item.name }}",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_add", "can_writeown"],
+                "ADMIN": ["can_add", "can_writeown"],
+                "MODERATOR": ["can_add", "can_writeown"],
+                "USER": ["can_add", "can_writeown"]
+            }
+        }, {
+            "title": "Withdraw Seting Detail: {{ item.name }}",
+            "description": "Withdraw Seting Detail: {{ item.name }}",
+            "controller": "Withdraws\\Settings\\Code\\Controllers\\SettingsController::detailAction",
+            "unique_name": "withdraws.settings.detail",
+            "route": "withdraws/settings/detail/{id}",
+            "permissions": "can_view, can_viewown",
+            "arguments": {
+                "id": null
+            },
+            "keywords": "withdraw, list, {{ item.name }}",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_viewown"],
+                "ADMIN": ["can_viewown"],
+                "MODERATOR": ["can_viewown"],
+                "USER": ["can_viewown"]
+            }
+
+        }, {
+            "title": "Withdraw Seting Save: {{ item.name }}",
+            "description": "Withdraw Seting Save: {{ item.name }}",
+            "controller": "Withdraws\\Settings\\Code\\Controllers\\SettingsController::saveAction",
+            "unique_name": "withdraws.settings.save",
+            "route": "withdraws/settings/save",
+            "permissions": "can_add, can_write, can_writeown",
+            "arguments": {
+                "id": null
+            },
+            "keywords": "withdraw, save, {{ item.name }}",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_add"],
+                "ADMIN": ["can_add"],
+                "MODERATOR": ["can_add"],
+                "USER": ["can_add"]
+            }
+
+        }, {
+            "title": "Withdraw Seting Invoice",
+            "description": "Withdraw Seting Invoice",
+            "controller": "Withdraws\\Settings\\Code\\Controllers\\SettingsController::invoiceAction",
+            "unique_name": "withdraws.settings.invoice",
+            "route": "withdraws/settings/invoice",
+             "permissions": "can_viewown",
+            "arguments": {
+                "id": null
+            },
+            "keywords": "withdraw, invoice, {{ item.name }}",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_viewown"],
+                "ADMIN": ["can_viewown"],
+                "MODERATOR": ["can_viewown"],
+                "USER": ["can_viewown"]
+            }
+
+
+        }]
+    ,
+    "backend": [{
+            "title": "General Tasks",
+            "description": "General Tasks.",
+            "controller": "Withdraws\\Settings\\Code\\Controllers\\Admin\\SettingsController::taskAction",
+            "unique_name": "admin.withdraws.settings.task",
+            "route": "admin/withdraws/settings/task",
+            "permissions": "can_add, can_write, can_writeown",
+            "arguments": "",
+            "keywords": "withdraws, task",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_add", "can_write", "can_writeown"],
+                "ADMIN": ["can_add", "can_write", "can_writeown"]
+            }
+        }, {
+            "title": "Withdraw Seting List",
+            "description": "Management of Withdraws Seting.",
+            "controller": "Withdraws\\Settings\\Code\\Controllers\\Admin\\SettingsController::indexAction",
+            "permissions": "can_view, can_viewown",
+            "unique_name": "admin.withdraws.settings",
+            "route": "admin/withdraws/settings",
+            "arguments": "",
+            "keywords": "withdraw, list",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_view", "can_viewown"],
+                "ADMIN": ["can_view", "can_viewown"]
+            }
+        }, {
+            "title": "Add Withdraw  Seting ",
+            "description": "Add Withdraw Seting.",
+            "controller": "Withdraws\\Settings\\Code\\Controllers\\Admin\\SettingsController::addAction",
+            "unique_name": "admin.withdraws.settings.add",
+            "route": "admin/withdraws/settings/add",
+            "permissions": "can_add",
+            "arguments": {},
+            "keywords": "withdraw, add",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_add"],
+                "ADMIN": ["can_add"]
+            }
+        }, {
+            "title": "Edit Withdraw Seting {{ item.name }}",
+            "description": "Edit Withdraw Seting {{ item.name }}.",
+            "controller": "Withdraws\\Settings\\Code\\Controllers\\Admin\\SettingsController::editAction",
+            "unique_name": "admin.withdraws.settings.edit",
+            "route": "admin/withdraws/settings/edit/{id}",
+            "permissions": "can_add, can_write, can_writeown",
+            "arguments": {
+                "id": null
+            },
+            "keywords": "withdraw, list, {{ item.name }}",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_add", "can_write", "can_writeown"],
+                "ADMIN": ["can_add", "can_write", "can_writeown"]
+            }
+        }, {
+            "title": "Withdraw Seting Detail: {{ item.name }}",
+            "description": "Withdraw Seting Detail: {{ item.name }}",
+            "controller": "Withdraws\\Settings\\Code\\Controllers\\Admin\\SettingsController::detailAction",
+            "unique_name": "admin.withdraws.settings.detail",
+            "route": "admin/withdraws/settings/detail/{id}",
+            "permissions": "can_view, can_viewown",
+            "arguments": {
+                "id": null
+            },
+            "keywords": "withdraw, list, {{ item.name }}",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_view", "can_viewown"],
+                "ADMIN": ["can_view", "can_viewown"]
+            }
+        }, {
+            "title": "Withdraw Seting Delete: {{ item.name }}",
+            "description": "Withdraw Seting Delete: {{ item.name }}",
+            "controller": "Withdraws\\Settings\\Code\\Controllers\\Admin\\SettingsController::deleteAction",
+            "unique_name": "admin.withdraws.settings.delete",
+            "route": "admin/withdraws/settings/delete/{id}",
+            "permissions": "can_delete, can_deleteown",
+            "arguments": {
+                "id": null
+            },
+            "keywords": "withdraw, delete, {{ item.name }}",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_delete", "can_deleteown"],
+                "ADMIN": ["can_delete", "can_deleteown"]
+            }
+        }, {
+            "title": "Withdraw Seting Save: {{ item.name }}",
+            "description": "Withdraw Seting Save: {{ item.name }}",
+            "controller": "Withdraws\\Settings\\Code\\Controllers\\Admin\\SettingsController::saveAction",
+            "unique_name": "admin.withdraws.settings.save",
+            "route": "admin/withdraws/settings/save",
+            "permissions": "can_add, can_write, can_writeown",
+            "arguments": {
+                "id": null
+            },
+            "keywords": "withdraw, save, {{ item.name }}",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_add", "can_write", "can_writeown"],
+                "ADMIN": ["can_add", "can_write", "can_writeown"]
+            }
+        }, {
+            "title": "Reverse Withdraw Seting",
+            "description": "Reverse Withdraw Seting",
+            "controller": "Withdraws\\Settings\\Code\\Controllers\\Admin\\SettingsController::reversewithdrawAction",
+            "unique_name": "admin.withdraws.settings.reversewithdraw",
+            "route": "admin.withdraws/settings/reversewithdraw/{id}",
+            "arguments": {
+                "id": null
+            },
+            "keywords": "business, reverse, withdraw, {{ item.name }}",
+            "priority": "0.5",
+            "changefreq": "weekly",
+            "login_required": 1,
+            "roles": {
+                "SUPER_ADMIN": ["can_delete", "can_deleteown"],
+                "ADMIN": ["can_add", "can_delete", "can_writeown"]
+            }
+        }]
+} 	

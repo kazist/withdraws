@@ -225,7 +225,7 @@ class MasspayModel extends BaseModel {
 
         $query = new Query();
         $query->select('fg.*');
-        $query->from('#__withdraws_gateways', 'fg');
+        $query->from('#__payments_gateways', 'pg');
         $query->where('fg.can_withdraw=1');
 
         $records = $query->loadObjectList();

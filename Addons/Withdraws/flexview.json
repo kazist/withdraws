@@ -1,0 +1,38 @@
+[
+    {
+        "title": "Withdraw List",
+        "show_title": "1",
+        "unique_name": "withdraws.addons.withdraws",
+        "icon": "fa-user",
+        "homepage": "0",
+        "allpages": "0",
+        "extensionpages": "1",
+        "viewside": "backend",
+        "explanation": "",
+        "description": "",
+        "suffix_content": "",
+        "prefix_content": "",
+        "main_content": "",
+        "positions": ["top_left"],
+        "setting": []
+
+    },
+    {
+        "title": "Withdraw Setting",
+        "show_title": "1",
+        "unique_name": "withdraws.addons.withdrawsetting",
+        "icon": "fa-user",
+        "homepage": "0",
+        "allpages": "0",
+        "extensionpages": "1",
+        "viewside": "backend",
+        "explanation": "",
+        "description": "",
+        "suffix_content": "",
+        "prefix_content": "",
+        "main_content": "",
+        "positions": ["top_left"],
+        "setting": []
+
+    }
+]

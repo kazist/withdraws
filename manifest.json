@@ -1,0 +1,12 @@
+{
+    "name": "kazist\/withdraws",
+    "title": "Withdraws",
+    "icon": "assets\/images\/icon.png",
+    "extension": "component",
+    "path": "Withdraws\/",
+    "description": "Withdraws",
+    "version": 1,
+    "is_core": 0,
+    "system_tracking_id": 0,
+    "is_modified": 0
+}

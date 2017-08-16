@@ -1,0 +1,14 @@
+{
+    "WithdrawsMasspay": {
+        "namespace": "Withdraws\\Masspay",
+        "controller": "MasspayController"
+    },
+    "WithdrawsWithdraws": {
+        "namespace": "Withdraws\\Withdraws",
+        "controller": "WithdrawsController"
+    },
+    "WithdrawsSettings": {
+        "namespace": "Withdraws\\Settings",
+        "controller": "SettingsController"
+    }
+}

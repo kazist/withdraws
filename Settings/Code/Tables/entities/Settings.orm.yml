@@ -1,0 +1,66 @@
+Withdraws\Settings\Code\Tables\Settings:
+  table: withdraws_settings
+  type: entity
+  id:
+    id:
+      type: integer
+      generator: { strategy: AUTO }
+  fields:
+    user_id:
+      name: user_id
+      type: integer
+      length: 11
+      nullable: false
+    gateway_id:
+      name: gateway_id
+      type: integer
+      length: 11
+      nullable: false
+    withdraw_id:
+      name: withdraw_id
+      type: string
+      length: 255
+      nullable: true
+    is_valid:
+      name: is_valid
+      type: integer
+      length: 11
+    published:
+      name: published
+      type: integer
+      length: 11
+      nullable: true
+    params:
+      name: params
+      type: text
+      nullable: true
+    created_by:
+      name: created_by
+      type: integer
+      length: 11
+      nullable: true
+    date_created:
+      name: date_created
+      type: datetime
+      nullable: true
+    modified_by:
+      name: modified_by
+      type: integer
+      length: 11
+      nullable: true
+    date_modified:
+      name: date_modified
+      type: datetime
+      nullable: true
+  indexes:
+    user_id_index:
+      columns: [user_id]
+    gateway_id_index:
+      columns: [gateway_id]
+  lifecycleCallbacks:
+    prePersist:
+      - onPrePersist
+      - onPrePersistCallbacks
+    preUpdate:
+      - onPreUpdate
+      - onPreUpdateCallbacks

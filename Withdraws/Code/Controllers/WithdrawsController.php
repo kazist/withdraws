@@ -64,10 +64,10 @@ class WithdrawsController extends BaseController {
 //print_r($minimum_amount); exit;
         if ($subscriber->subscription->website == '') {
             $factory->enqueueMessage('Hosting is mandatory for all upgraded accounts. Please set up you hosting Domain Details.', 'error');
-            return $this->redirectToRoute('subscriptions.subscriptions.hosting');
+            return $this->redirectToRoute('affiliates.affiliates.hosting');
         } elseif (empty($gateways)) {
             $factory->enqueueMessage(' Please provide all financial details in order to proceed with withdrawal.', 'error');
-            return $this->redirectToRoute('subscriptions.subscriptions.edit', array('user_id' => $subscriber->id));
+            return $this->redirectToRoute('affiliates.affiliates.edit', array('user_id' => $subscriber->id));
         }
 
         $data_arr['item'] = $item;

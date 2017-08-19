@@ -4,7 +4,7 @@
 {{ set_assets('applications/Withdraws/assets/js/withdraws.js') }}
 
 {% set withdraw_amount = 0 %}
-{% set available_amount = subscriber.money_in - subscriber.money_out %}
+{% set available_amount = user.money_in - user.money_out %}
 
 <h1> Withdraw Fund</h1>
 <hr>

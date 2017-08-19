@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Settings
  *
- * @ORM\Table(name="withdraws_settings", indexes={@ORM\Index(name="user_id_index", columns={"user_id"}), @ORM\Index(name="gateway_id_index", columns={"gateway_id"})})
+ * @ORM\Table(name="withdraws_settings", indexes={@ORM\Index(name="user_id_index", columns={"user_id"})})
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks
  */
@@ -30,39 +30,18 @@ class Settings extends \Kazist\Table\BaseTable
     protected $user_id;
 
     /**
-     * @var integer
+     * @var string
      *
-     * @ORM\Column(name="gateway_id", type="integer", length=11, nullable=false)
+     * @ORM\Column(name="id_passport", type="string", length=255, nullable=false)
      */
-    protected $gateway_id;
+    protected $id_passport;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="withdraw_id", type="string", length=255, nullable=true)
+     * @ORM\Column(name="pin", type="string", length=255, nullable=false)
      */
-    protected $withdraw_id;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="is_valid", type="integer", length=11)
-     */
-    protected $is_valid;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="published", type="integer", length=11, nullable=true)
-     */
-    protected $published;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="params", type="text", nullable=true)
-     */
-    protected $params;
+    protected $pin;
 
     /**
      * @var integer
@@ -128,123 +107,51 @@ class Settings extends \Kazist\Table\BaseTable
     }
 
     /**
-     * Set gatewayId
+     * Set idPassport
      *
-     * @param integer $gatewayId
+     * @param string $idPassport
      *
      * @return Settings
      */
-    public function setGatewayId($gatewayId)
+    public function setIdPassport($idPassport)
     {
-        $this->gateway_id = $gatewayId;
+        $this->id_passport = $idPassport;
 
         return $this;
     }
 
     /**
-     * Get gatewayId
-     *
-     * @return integer
-     */
-    public function getGatewayId()
-    {
-        return $this->gateway_id;
-    }
-
-    /**
-     * Set withdrawId
-     *
-     * @param string $withdrawId
-     *
-     * @return Settings
-     */
-    public function setWithdrawId($withdrawId)
-    {
-        $this->withdraw_id = $withdrawId;
-
-        return $this;
-    }
-
-    /**
-     * Get withdrawId
+     * Get idPassport
      *
      * @return string
      */
-    public function getWithdrawId()
+    public function getIdPassport()
     {
-        return $this->withdraw_id;
+        return $this->id_passport;
     }
 
     /**
-     * Set isValid
+     * Set pin
      *
-     * @param integer $isValid
+     * @param string $pin
      *
      * @return Settings
      */
-    public function setIsValid($isValid)
+    public function setPin($pin)
     {
-        $this->is_valid = $isValid;
+        $this->pin = $pin;
 
         return $this;
     }
 
     /**
-     * Get isValid
-     *
-     * @return integer
-     */
-    public function getIsValid()
-    {
-        return $this->is_valid;
-    }
-
-    /**
-     * Set published
-     *
-     * @param integer $published
-     *
-     * @return Settings
-     */
-    public function setPublished($published)
-    {
-        $this->published = $published;
-
-        return $this;
-    }
-
-    /**
-     * Get published
-     *
-     * @return integer
-     */
-    public function getPublished()
-    {
-        return $this->published;
-    }
-
-    /**
-     * Set params
-     *
-     * @param string $params
-     *
-     * @return Settings
-     */
-    public function setParams($params)
-    {
-        $this->params = $params;
-
-        return $this;
-    }
-
-    /**
-     * Get params
+     * Get pin
      *
      * @return string
      */
-    public function getParams()
+    public function getPin()
     {
-        return $this->params;
+        return $this->pin;
     }
 
     /**

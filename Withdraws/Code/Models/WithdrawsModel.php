@@ -13,9 +13,8 @@ defined('KAZIST') or exit('Not Kazist Framework');
 use Kazist\Model\BaseModel;
 use Kazist\KazistFactory;
 use Kazist\Service\Email\Email;
-use Withdraws\Payments\Code\Models\PaymentsModel;
-use Withdraws\Transactions\Code\Models\TransactionsModel;
-use Subscriptions\Subscriptions\Code\Classes\Subscriber;
+use Payments\Payments\Code\Models\PaymentsModel;
+use Payments\Transactions\Code\Models\TransactionsModel;
 use Kazist\Service\Database\Query;
 
 /**
@@ -38,19 +37,19 @@ class WithdrawsModel extends BaseModel {
             $user_id = $user->id;
         }
 
-        $query = parent::getQueryBuilder('#__withdraws_withdraws', 'fw');
+        $query = parent::getQueryBuilder('#__withdraws_withdraws', 'ww');
 
         if ($user_id) {
-            $query->where('fw.user_id=' . $user_id);
+            $query->where('ww.user_id=' . $user_id);
         }
 
         return $query;
     }
 
-    public function save($form) {
+    public function save($form = '') {
 
         $factory = new KazistFactory();
-        $user = $factory->getUser();
+        $user_obj = $factory->getUser();
 
         $form = $this->request->get('form');
 
@@ -58,54 +57,49 @@ class WithdrawsModel extends BaseModel {
 
             $url = $this->generateUrl('withdraws.withdraws');
 
-            $form['user_id'] = $user->id;
+            $form['user_id'] = $user_obj->id;
             $form['return_url'] = base64_encode($url);
         }
 
-        $subscriber = $this->getSubscriber($form['user_id']);
-        $total_amount = $subscriber->money_in - $subscriber->money_out;
+        $user = $this->getUser($form['user_id']);
+        $total_amount = $user->money_in - $user->money_out;
 
         $params = $this->getInvoice();
         $params = array_reverse($params);
         $total_param = $params[0];
-        unset($params[0]);
 
         if ($total_param->amount > $total_amount) {
             $factory->enqueueMessage('Amount to be withdrawn (' . $total_param->amount . ') is more than Available Amount (' . $total_amount . ')');
             return false;
         }
 
-        $form['gateway_id'] = (isset($subscriber->subscription->gateway_id)) ? $subscriber->subscription->gateway_id : 0;
-        // $form['amount'] = ($total_param->amount) ? $total_param->amount : 0;
-
         $withdraw_id = parent::save($form);
 
         if ($withdraw_id) {
-            $this->sendEmail($form['user_id'], $withdraw_id);
-            $this->getDeductCommission($form['user_id'], $withdraw_id, $params);
+            $this->sendEmail($user, $withdraw_id);
+            $this->getDeductCommission($user, $withdraw_id, $params);
         }
 
         return $withdraw_id;
     }
 
-    public function sendEmail($user_id, $withdraw_id) {
+    public function sendEmail($user, $withdraw_id) {
 
         $tmp_array = array();
         $email = new Email();
         $factory = new KazistFactory();
 
-        $tmp_array['user'] = $factory->getRecord('#__users_users', 'uu', array('id=:id'), array('id' => $user_id));
+        $tmp_array['user'] = $user;
         $tmp_array['withdraw'] = $factory->getRecord('#__withdraws_withdraws', 'fw', array('id=:id'), array('id' => $withdraw_id));
 
         $email->sendDefinedLayoutEmail('withdraws.withdraws.fundwithdraw', $tmp_array['user']->email, $tmp_array);
     }
 
-    public function getDeductCommission($user_id, $withdraw_id, $params) {
+    public function getDeductCommission($user, $withdraw_id, $params) {
 
         $factory = new KazistFactory();
 
         $parent_id = '';
-        $user = $factory->getRecord('#__users_users', 'uu', array('uu.id=:id'), array('id' => $user_id));
 
         $params = array_reverse($params);
 
@@ -113,8 +107,8 @@ class WithdrawsModel extends BaseModel {
             foreach ($params as $key => $param) {
 
                 $data_obj = new \stdClass();
-                $data_obj->user_id = $user_id;
-                $data_obj->behalf_user_id = $user_id;
+                $data_obj->user_id = $user->id;
+                $data_obj->behalf_user_id = $user->id;
                 $data_obj->description = ($key) ? $param->title . ' For ' . $parent_id : 'Fund Withdrawal To ' . $user->username;
                 $data_obj->item_id = $withdraw_id;
                 $data_obj->rate_id = $param->id;
@@ -122,7 +116,7 @@ class WithdrawsModel extends BaseModel {
                 $data_obj->debit = $param->amount;
                 $data_obj->type = 'fund-withdraw';
 
-                $id = $factory->saveRecord('#__withdraws_transactions', $data_obj);
+                $id = $factory->saveRecord('#__payments_transactions', $data_obj);
 
                 if (!$key) {
                     $parent_id = $id;
@@ -131,25 +125,11 @@ class WithdrawsModel extends BaseModel {
         }
     }
 
-    public function getWithdrawGateway($subscriber = '') {
-
-        $user = (is_object($subscriber)) ? $subscriber : $this->getSubscriber();
-
-        $query = new Query();
-        $query->select('fg.*');
-        $query->from('#__payments_gateways', 'pg');
-        $query->where('fg.id=:id');
-        $query->setParameter('id', (int) $user->subscription->gateway_id);
-        $record = $query->loadObject();
-
-        return $record;
-    }
-
     public function getPaidInput() {
 
         $tmp_array = array();
-        $tmp_array[] = array('value' =>'1', 'text' => 'Paid');
-        $tmp_array[] = array('value' =>'0', 'text' => 'Not Paid');
+        $tmp_array[] = array('value' => '1', 'text' => 'Paid');
+        $tmp_array[] = array('value' => '0', 'text' => 'Not Paid');
         return $tmp_array;
     }
 
@@ -172,30 +152,42 @@ class WithdrawsModel extends BaseModel {
         return $tmp_array;
     }
 
-    public function getWithdrawGateways($subscriber = '') {
+    public function getWithdrawSetting() {
 
-        $tmp_array = array();
         $factory = new KazistFactory();
 
-        $user = (is_object($subscriber)) ? $subscriber : $this->getSubscriber();
+        $user = (is_object($user)) ? $user : $this->getUser();
 
+        $query = $factory->getQueryBuilder('#__withdraws_settings', 'ws');
+        $query->where('ws.user_id=:user_id');
+        $query->setParameter('user_id', $user->id);
+        $record = $query->loadObject();
 
-        $query = new Query();
-        $query->select('fg.*');
-        $query->from('#__payments_gateways', 'fg');
-        $query->where('fg.id=:id');
-        $query->setParameter('id', (int) $user->subscription->gateway_id);
+        return $record;
+    }
+
+    public function getWithdrawGateways($user = '') {
+
+        $factory = new KazistFactory();
+
+        $user = (is_object($user)) ? $user : $this->getUser();
+
+        $query = $factory->getQueryBuilder('#__withdraws_settings_gateways', 'wsg');
+        $query->addSelect('pg.short_name, pg.long_name ');
+        $query->where('wsg.user_id=:user_id');
+        $query->setParameter('user_id', (int) $user->id);
+        $query->orderBy('wsg.is_default', 'DESC');
         $records = $query->loadObjectList();
 
-        if (!empty($records)) {
-            foreach ($records as $record) {
-                $tmp_array[] = array('value' => $record->id, 'text' => $record->long_name . ' (' . $record->short_name . ')');
-            }
-        } else {
-            $factory->enqueueMessage('No Withdraw Gateway Set. Kindly Edit You Subscription.', 'error');
+        foreach ($records as $key => $record) {
+            $records[$key]->params = json_decode($record->params, true);
         }
 
-        return $tmp_array;
+        if (!$records[0]->is_default) {
+            $records[0]->is_default = 1;
+        }
+
+        return $records;
     }
 
     public function getInvoice() {
@@ -222,24 +214,13 @@ class WithdrawsModel extends BaseModel {
         return $form;
     }
 
-    public function getSubscriber($user_id = '') {
+    public function getUser($user_id = '') {
 
-        $tmp_array = array();
+        $payment = new PaymentsModel();
 
-        $factory = new KazistFactory();
+        $user = $payment->getUser();
 
-
-        $user = $factory->getUser();
-
-        $form = $this->request->request->get('form', null, null);
-
-        if (!$user_id) {
-            $user_id = (!WEB_IS_ADMIN) ? $user->id : $this->request->request->get('user_id');
-        }
-        $subscriber = new Subscriber();
-        $subscriber_obj = $subscriber->getSubscriber($user_id, true, false);
-
-        return $subscriber_obj;
+        return $user;
     }
 
     //xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx  reverseWithdraw

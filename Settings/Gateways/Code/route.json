@@ -1,11 +1,11 @@
 {
     "frontend": [{
-            "title": "Withdraw Setting List",
-            "description": "Management of Withdraws Setting.",
-            "controller": "Withdraws\\Settings\\Code\\Controllers\\SettingsController::indexAction",
+            "title": "Withdraw Gateway List",
+            "description": "Management of Withdraws Gateway.",
+            "controller": "Withdraws\\Settings\\Gateways\\Code\\Controllers\\GatewaysController::indexAction",
             "permissions": "can_view, can_viewown",
-            "unique_name": "withdraws.settings",
-            "route": "withdraws/settings",
+            "unique_name": "withdraws.settings.gateways",
+            "route": "withdraws/settings/gateways",
             "arguments": "",
             "keywords": "withdraw, list",
             "priority": "0.5",
@@ -18,11 +18,11 @@
                 "USER": ["can_viewown"]
             }
         }, {
-            "title": "Add Withdraw Setting ",
-            "description": "Add Withdraw Setting .",
-            "controller": "Withdraws\\Settings\\Code\\Controllers\\SettingsController::addAction",
-            "unique_name": "withdraws.settings.add",
-            "route": "withdraws/settings/add",
+            "title": "Add Withdraw Gateway ",
+            "description": "Add Withdraw Gateway .",
+            "controller": "Withdraws\\Settings\\Gateways\\Code\\Controllers\\GatewaysController::addAction",
+            "unique_name": "withdraws.settings.gateways.add",
+            "route": "withdraws/settings/gateways/add",
             "permissions": "can_add",
             "arguments": {},
             "keywords": "withdraw, add",
@@ -36,11 +36,11 @@
                 "USER": ["can_add"]
             }
         }, {
-            "title": "Edit Withdraw Setting {{ item.name }}",
-            "description": "Edit Withdraw Setting {{ item.name }}.",
-            "controller": "Withdraws\\Settings\\Code\\Controllers\\SettingsController::editAction",
-            "unique_name": "withdraws.settings.edit",
-            "route": "withdraws/settings/edit/{id}",
+            "title": "Edit Withdraw Gateway {{ item.name }}",
+            "description": "Edit Withdraw Gateway {{ item.name }}.",
+            "controller": "Withdraws\\Settings\\Gateways\\Code\\Controllers\\GatewaysController::editAction",
+            "unique_name": "withdraws.settings.gateways.edit",
+            "route": "withdraws/settings/gateways/edit/{id}",
             "permissions": "can_add, can_write, can_writeown",
             "arguments": {
                 "id": null
@@ -56,11 +56,11 @@
                 "USER": ["can_add", "can_writeown"]
             }
         }, {
-            "title": "Withdraw Setting Detail: {{ item.name }}",
-            "description": "Withdraw Setting Detail: {{ item.name }}",
-            "controller": "Withdraws\\Settings\\Code\\Controllers\\SettingsController::detailAction",
-            "unique_name": "withdraws.settings.detail",
-            "route": "withdraws/settings/detail/{id}",
+            "title": "Withdraw Gateway Detail: {{ item.name }}",
+            "description": "Withdraw Gateway Detail: {{ item.name }}",
+            "controller": "Withdraws\\Settings\\Gateways\\Code\\Controllers\\GatewaysController::detailAction",
+            "unique_name": "withdraws.settings.gateways.detail",
+            "route": "withdraws/settings/gateways/detail/{id}",
             "permissions": "can_view, can_viewown",
             "arguments": {
                 "id": null
@@ -77,11 +77,11 @@
             }
 
         }, {
-            "title": "Withdraw Setting Save: {{ item.name }}",
-            "description": "Withdraw Setting Save: {{ item.name }}",
-            "controller": "Withdraws\\Settings\\Code\\Controllers\\SettingsController::saveAction",
-            "unique_name": "withdraws.settings.save",
-            "route": "withdraws/settings/save",
+            "title": "Withdraw Gateway Save: {{ item.name }}",
+            "description": "Withdraw Gateway Save: {{ item.name }}",
+            "controller": "Withdraws\\Settings\\Gateways\\Code\\Controllers\\GatewaysController::saveAction",
+            "unique_name": "withdraws.settings.gateways.save",
+            "route": "withdraws/settings/gateways/save",
             "permissions": "can_add, can_write, can_writeown",
             "arguments": {
                 "id": null
@@ -98,11 +98,11 @@
             }
 
         }, {
-            "title": "Withdraw Setting Invoice",
-            "description": "Withdraw Setting Invoice",
-            "controller": "Withdraws\\Settings\\Code\\Controllers\\SettingsController::invoiceAction",
-            "unique_name": "withdraws.settings.invoice",
-            "route": "withdraws/settings/invoice",
+            "title": "Withdraw Gateway Invoice",
+            "description": "Withdraw Gateway Invoice",
+            "controller": "Withdraws\\Settings\\Gateways\\Code\\Controllers\\GatewaysController::invoiceAction",
+            "unique_name": "withdraws.settings.gateways.invoice",
+            "route": "withdraws/settings/gateways/invoice",
              "permissions": "can_viewown",
             "arguments": {
                 "id": null
@@ -124,9 +124,9 @@
     "backend": [{
             "title": "General Tasks",
             "description": "General Tasks.",
-            "controller": "Withdraws\\Settings\\Code\\Controllers\\Admin\\SettingsController::taskAction",
-            "unique_name": "admin.withdraws.settings.task",
-            "route": "admin/withdraws/settings/task",
+            "controller": "Withdraws\\Settings\\Gateways\\Code\\Controllers\\Admin\\GatewaysController::taskAction",
+            "unique_name": "admin.withdraws.settings.gateways.task",
+            "route": "admin/withdraws/settings/gateways/task",
             "permissions": "can_add, can_write, can_writeown",
             "arguments": "",
             "keywords": "withdraws, task",
@@ -138,12 +138,12 @@
                 "ADMIN": ["can_add", "can_write", "can_writeown"]
             }
         }, {
-            "title": "Withdraw Setting List",
-            "description": "Management of Withdraws Setting.",
-            "controller": "Withdraws\\Settings\\Code\\Controllers\\Admin\\SettingsController::indexAction",
+            "title": "Withdraw Gateway List",
+            "description": "Management of Withdraws Gateway.",
+            "controller": "Withdraws\\Settings\\Gateways\\Code\\Controllers\\Admin\\GatewaysController::indexAction",
             "permissions": "can_view, can_viewown",
-            "unique_name": "admin.withdraws.settings",
-            "route": "admin/withdraws/settings",
+            "unique_name": "admin.withdraws.settings.gateways",
+            "route": "admin/withdraws/settings/gateways",
             "arguments": "",
             "keywords": "withdraw, list",
             "priority": "0.5",
@@ -154,11 +154,11 @@
                 "ADMIN": ["can_view", "can_viewown"]
             }
         }, {
-            "title": "Add Withdraw  Setting ",
-            "description": "Add Withdraw Setting.",
-            "controller": "Withdraws\\Settings\\Code\\Controllers\\Admin\\SettingsController::addAction",
-            "unique_name": "admin.withdraws.settings.add",
-            "route": "admin/withdraws/settings/add",
+            "title": "Add Withdraw  Gateway ",
+            "description": "Add Withdraw Gateway.",
+            "controller": "Withdraws\\Settings\\Gateways\\Code\\Controllers\\Admin\\GatewaysController::addAction",
+            "unique_name": "admin.withdraws.settings.gateways.add",
+            "route": "admin/withdraws/settings/gateways/add",
             "permissions": "can_add",
             "arguments": {},
             "keywords": "withdraw, add",
@@ -170,11 +170,11 @@
                 "ADMIN": ["can_add"]
             }
         }, {
-            "title": "Edit Withdraw Setting {{ item.name }}",
-            "description": "Edit Withdraw Setting {{ item.name }}.",
-            "controller": "Withdraws\\Settings\\Code\\Controllers\\Admin\\SettingsController::editAction",
-            "unique_name": "admin.withdraws.settings.edit",
-            "route": "admin/withdraws/settings/edit/{id}",
+            "title": "Edit Withdraw Gateway {{ item.name }}",
+            "description": "Edit Withdraw Gateway {{ item.name }}.",
+            "controller": "Withdraws\\Settings\\Gateways\\Code\\Controllers\\Admin\\GatewaysController::editAction",
+            "unique_name": "admin.withdraws.settings.gateways.edit",
+            "route": "admin/withdraws/settings/gateways/edit/{id}",
             "permissions": "can_add, can_write, can_writeown",
             "arguments": {
                 "id": null
@@ -188,11 +188,11 @@
                 "ADMIN": ["can_add", "can_write", "can_writeown"]
             }
         }, {
-            "title": "Withdraw Setting Detail: {{ item.name }}",
-            "description": "Withdraw Setting Detail: {{ item.name }}",
-            "controller": "Withdraws\\Settings\\Code\\Controllers\\Admin\\SettingsController::detailAction",
-            "unique_name": "admin.withdraws.settings.detail",
-            "route": "admin/withdraws/settings/detail/{id}",
+            "title": "Withdraw Gateway Detail: {{ item.name }}",
+            "description": "Withdraw Gateway Detail: {{ item.name }}",
+            "controller": "Withdraws\\Settings\\Gateways\\Code\\Controllers\\Admin\\GatewaysController::detailAction",
+            "unique_name": "admin.withdraws.settings.gateways.detail",
+            "route": "admin/withdraws/settings/gateways/detail/{id}",
             "permissions": "can_view, can_viewown",
             "arguments": {
                 "id": null
@@ -206,11 +206,11 @@
                 "ADMIN": ["can_view", "can_viewown"]
             }
         }, {
-            "title": "Withdraw Setting Delete: {{ item.name }}",
-            "description": "Withdraw Setting Delete: {{ item.name }}",
-            "controller": "Withdraws\\Settings\\Code\\Controllers\\Admin\\SettingsController::deleteAction",
-            "unique_name": "admin.withdraws.settings.delete",
-            "route": "admin/withdraws/settings/delete/{id}",
+            "title": "Withdraw Gateway Delete: {{ item.name }}",
+            "description": "Withdraw Gateway Delete: {{ item.name }}",
+            "controller": "Withdraws\\Settings\\Gateways\\Code\\Controllers\\Admin\\GatewaysController::deleteAction",
+            "unique_name": "admin.withdraws.settings.gateways.delete",
+            "route": "admin/withdraws/settings/gateways/delete/{id}",
             "permissions": "can_delete, can_deleteown",
             "arguments": {
                 "id": null
@@ -224,11 +224,11 @@
                 "ADMIN": ["can_delete", "can_deleteown"]
             }
         }, {
-            "title": "Withdraw Setting Save: {{ item.name }}",
-            "description": "Withdraw Setting Save: {{ item.name }}",
-            "controller": "Withdraws\\Settings\\Code\\Controllers\\Admin\\SettingsController::saveAction",
-            "unique_name": "admin.withdraws.settings.save",
-            "route": "admin/withdraws/settings/save",
+            "title": "Withdraw Gateway Save: {{ item.name }}",
+            "description": "Withdraw Gateway Save: {{ item.name }}",
+            "controller": "Withdraws\\Settings\\Gateways\\Code\\Controllers\\Admin\\GatewaysController::saveAction",
+            "unique_name": "admin.withdraws.settings.gateways.save",
+            "route": "admin/withdraws/settings/gateways/save",
             "permissions": "can_add, can_write, can_writeown",
             "arguments": {
                 "id": null
@@ -242,11 +242,11 @@
                 "ADMIN": ["can_add", "can_write", "can_writeown"]
             }
         }, {
-            "title": "Reverse Withdraw Setting",
-            "description": "Reverse Withdraw Setting",
-            "controller": "Withdraws\\Settings\\Code\\Controllers\\Admin\\SettingsController::reversewithdrawAction",
-            "unique_name": "admin.withdraws.settings.reversewithdraw",
-            "route": "admin.withdraws/settings/reversewithdraw/{id}",
+            "title": "Reverse Withdraw Gateway",
+            "description": "Reverse Withdraw Gateway",
+            "controller": "Withdraws\\Settings\\Gateways\\Code\\Controllers\\Admin\\GatewaysController::reversewithdrawAction",
+            "unique_name": "admin.withdraws.settings.gateways.reversewithdraw",
+            "route": "admin.withdraws/settings/gateways/reversewithdraw/{id}",
             "arguments": {
                 "id": null
             },

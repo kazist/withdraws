@@ -10,5 +10,9 @@
     "WithdrawsSettings": {
         "namespace": "Withdraws\\Settings",
         "controller": "SettingsController"
+    },
+    "WithdrawsSettingsGateways": {
+        "namespace": "Withdraws\\Settings\\Gateways",
+        "controller": "GatewaysController"
     }
 }

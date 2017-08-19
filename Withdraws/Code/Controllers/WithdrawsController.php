@@ -37,11 +37,12 @@ class WithdrawsController extends BaseController {
         $factory = new KazistFactory();
 
         $form = $this->request->request->get('form');
-        $subscriber = $this->model->getSubscriber();
+        $user = $this->model->getUser();
 
         $minimum_amount = $factory->getSetting('withdraws_withdraw_minimum_amount');
 
-        if ($form['amount'] >= $minimum_amount && $subscriber->money_in >= $form['amount']) {
+        if ($form['amount'] >= $minimum_amount && $user->money_in >= $form['amount']) {
+            $this->return_url = 'withdraws.withdraws';
             return parent::saveAction($form);
         } else {
             $factory->enqueueMessage(' Wrong amount provided. Enter correct amount.', 'error');
@@ -58,22 +59,19 @@ class WithdrawsController extends BaseController {
         $this->model = new WithdrawsModel();
 
         $item = $this->model->getRecord();
-        $subscriber = $this->model->getSubscriber();
-        $gateways = $this->model->getWithdrawGateways($subscriber);
-        $gateway = $this->model->getWithdrawGateway($subscriber);
-//print_r($minimum_amount); exit;
-        if ($subscriber->subscription->website == '') {
-            $factory->enqueueMessage('Hosting is mandatory for all upgraded accounts. Please set up you hosting Domain Details.', 'error');
-            return $this->redirectToRoute('affiliates.affiliates.hosting');
-        } elseif (empty($gateways)) {
+        $user = $this->model->getUser();
+        $gateways = $this->model->getWithdrawGateways($user);
+        $setting = $this->model->getWithdrawSetting($user);
+
+        if (empty($gateways)) {
             $factory->enqueueMessage(' Please provide all financial details in order to proceed with withdrawal.', 'error');
-            return $this->redirectToRoute('affiliates.affiliates.edit', array('user_id' => $subscriber->id));
+            return $this->redirectToRoute('withdraws.settings.edit', array('user_id' => $user->id));
         }
 
         $data_arr['item'] = $item;
         $data_arr['gateways'] = $gateways;
-        $data_arr['gateway'] = $gateway;
-        $data_arr['subscriber'] = $subscriber;
+        $data_arr['setting'] = $setting;
+        $data_arr['user'] = $user;
         $data_arr['minimum_amount'] = $minimum_amount;
 
         $this->html = $this->render('Withdraws:Withdraws:Code:views:edit.index.twig', $data_arr);
@@ -93,7 +91,7 @@ class WithdrawsController extends BaseController {
 
         $form = $this->request->get('form');
         $rates = $this->model->getInvoice();
-        $subscriber = $this->model->getSubscriber();
+        $user = $this->model->getUser();
 
         if ($minimum_amount > $form['amount']) {
             $factory->enqueueMessage('The Amount Withdrawn (' . $form['amount'] . ') is less than minimum anount (' . $minimum_amount . ')', 'error');
@@ -103,7 +101,7 @@ class WithdrawsController extends BaseController {
         $data_arr['rates'] = $rates;
         $data_arr['rates_json'] = json_encode($rates);
         $data_arr['form'] = $form;
-        $data_arr['subscriber'] = $subscriber;
+        $data_arr['user'] = $user;
         $data_arr['minimum_amount'] = $minimum_amount;
 
         $this->html = $this->render('Withdraws:Withdraws:Code:views:invoice.index.twig', $data_arr);

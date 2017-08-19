@@ -2,7 +2,7 @@
 
 {{ set_assets('applications/Withdraws/assets/js/withdraws.js') }}
 
-{% set available_amount = subscriber.money_in - subscriber.money_out %}
+{% set available_amount = user.money_in - user.money_out %}
 
 <h1> Withdrawal Fund</h1>
 <hr>
@@ -10,98 +10,129 @@
 <form id="{{ main_form_id }}" class="form-horizontal" action="{{ generate_url('withdraws.withdraws.invoice') }}" method="post" role="form"  enctype="multipart/form-data">
 
 
-    <div class="alert alert-danger">
-        Minimum withdrawal is <b>${{ minimum_amount }}</b>. For Withdrawal To Work Ensure You Leave <b>$2</b> Balance.
-    </div>
-    <div>
-        <div class="col-md-9">
+    <section class="withdraw-fund">
 
-            {{ forms.input('amount', 'text', null, 'Amount')  }}
+        <div class="col-sm-offset-1 col-sm-10">
 
-            {% if gateways|length > 1 %}
-                {{ forms.input('gateway_id', 'radio', null, 'Gateway', null, null, null, null, gateways)  }}
-            {% else %}
-                {{ forms.input('gateway_id', 'hidden', gateways.0.value) }}
-            {% endif %}
-        </div>
-    </div>
+            <img class="img-responsive hidden-xs" src="{{ web_root }}assets/images/briefcase.png" align="left">
+
+            <h3 class="text-blue">Withdraw money from your account.</h3>
+
+            <i class="fa fa-arrow-right"></i> <span class="text-bold">Minimum withdrawal is <b>${{ minimum_amount }}</b>.</span><br>
+            <i class="fa fa-arrow-right"></i> <span class="text-bold">For Withdrawal To Work Ensure You Leave <b>$2</b> Balance.</span><br>
 
 
+            <h5 class="text-blue text-uppercase">Withdraw money Form</h5>
 
-    <div class="clearfix"></div>
-    {{ forms.input('user_id', 'hidden', subscriber.id, 'id')  }}
 
-    {% if available_amount > minimum_amount %}
+            <div>
+                <div class="col-md-8">
 
-        <div class="text-center bg-green">
-            Available Amount is {{ available_amount|number_format(2) }}.
-        </div>
-        <br>
+                    {{ forms.input('amount', 'text', null, 'Amount')  }}
 
-        <div class="col-md-12 alert bg-gray">
-            <small>
-                <div class="">
-                    <label>{{ gateway.input_label }}: </label> {{ subscriber.phone }}
+                    <div class="form-group gateway_id-group">
+
+                        <label for="gateway_id" class="col-sm-3 control-label">Payment Gateway</label>
+
+                        <div class="col-sm-9 kazicode-form-field ">
+                            {% for gateway in gateways %}
+                                <input class="selected_gateways" type="radio" name="form[gateway_id]" value="{{ gateway.gateway_id }}" short_name="{{ gateway.short_name }}" {% if gateway.is_default %}checked="checked"{% endif %}>
+                                {{ gateway.long_name }}
+                            {% endfor %}
+
+                            <div class="payment-gateways">
+                                {% for gateway in gateways %}
+                                    <div class="payment-gateway gateway-{{ gateway.short_name }}" {% if not gateway.is_default %}style="display:none;"{% endif %}> 
+                                        <ul>
+
+                                            {% for key,setting in gateway.params %}
+                                                <li>
+                                                    <b>{{ key|capitalize }}: </b> {{ setting }}
+                                                </li>
+                                            {% endfor %}
+                                        </ul>
+
+
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+
+                    {{ forms.input('pin', 'text', setting.pin, 'Pin', null, null, null, true)  }}
+                    {{ forms.input('id_passport', 'text', setting.id_passport, 'Id or Passport', null, null, null, true)  }}
+               
+                </div>
+            </div>
+
+
+
+            <div class="clearfix"></div>
+            {{ forms.input('user_id', 'hidden', user.id, 'id')  }}
+
+            {% if available_amount > minimum_amount %}
+
+                <div class="alert alert-success text-center">
+                    Available Amount is {{ available_amount|number_format(2) }}.
+                </div>
+                <br>
+
+                <div class="text-center registration-buttons">
+                    <input class="btn btn-success btn-sm" type="submit" name="submit" value="Withdraw Fund" />
+                    <a class="btn btn-danger btn-sm" href="{{ generate_url('withdraws.withdraws.save') }}">Cancel</a> 
                 </div>
 
-                {% if subscriber.subscription.kra_pin != '' %}
-                    <div class="">
-                        <label>KRA Pin: </label> {{ subscriber.subscription.kra_pin }}
-                    </div>
-                {% endif%}
 
-            </small>
-        </div>
 
-        <div class="text-center registration-buttons">
-            <input class="btn btn-success btn-sm" type="submit" name="submit" value="Withdraw Fund" />
-            <a class="btn btn-danger btn-sm" href="{{ generate_url('withdraws.withdraws.save') }}">Cancel</a> 
-        </div>
+            {% else %}
+                <div class=" alert alert-danger text-center">
+                    Available Amount  {{ available_amount|number_format(2) }} is less than {{ minimum_amount|number_format(2) }}.
+                </div>
+                <br>
+                <div class="text-center registration-buttons">
+                    <a class="btn btn-danger btn-sm" href="{{ generate_url('withdraws.withdraws') }}">Cancel</a> 
+                </div>
+            {% endif %}
 
 
 
-    {% else %}
-        <div class="text-center bg-red">
-            Available Amount  {{ available_amount|number_format(2) }} is less than {{ minimum_amount|number_format(2) }}.
-        </div>
-        <br>
-        <div class="text-center registration-buttons">
-            <a class="btn btn-danger btn-sm" href="{{ generate_url('withdraws.withdraws') }}">Cancel</a> 
-        </div>
-    {% endif %}
+            {% include "form.hidden.twig" %}
 
 
-
-    {% include "form.hidden.twig" %}
+    </section>
 
     {{ forms.input('_token' ) }} 
 
 </form>
 
-<style>
+    <style>
+        .withdraw-fund .form-group{
+           margin:0; 
+        }
+        
+        .withdraw-fund .alert{
+           margin-bottom:0; 
+        }
+    </style>
+    
+<script>
+
+    jQuery(document).ready(function () {
+
+        jQuery('input.selected_gateways').click(function () {
+
+            var gateway_short_name = jQuery(this).attr('short_name');
+            processGateway(gateway_short_name);
+
+        });
+
+    });
 
 
-    .inviter_detail_name{
-        font-weight: bold;
+    function processGateway(gateway_short_name) {
+        jQuery('.gateway-' + gateway_short_name).toggle();
     }
 
-    .location_id-group{
-        display: none;
-    }
-
-    .inviter_detail-group #date_arr{
-        width: 50px;
-        display: inline-block;
-    }
-    .inviter_detail-group #month_arr{
-        width: 100px;
-        display: inline-block;
-    }
-    .inviter_detail-group #year_arr{
-        width: 80px;
-        display: inline-block;
-    }
-</style>
-
+</script>
 
 

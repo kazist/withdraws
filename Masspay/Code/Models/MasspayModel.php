@@ -12,7 +12,7 @@ defined('KAZIST') or exit('Not Kazist Framework');
 
 use Kazist\Model\BaseModel;
 use Kazist\KazistFactory;
-use Subscriptions\Subscriptions\Code\Classes\Subscriber;
+use Payments\Payments\Code\Models\PaymentsModel;
 use Kazist\Service\Email\Email;
 use Kazist\Service\Database\Query;
 
@@ -133,17 +133,19 @@ class MasspayModel extends BaseModel {
         $tmp_array = array();
 
         $factory = new KazistFactory();
-        $subscriber = new Subscriber();
+        $paymentsModel = new PaymentsModel();
 
         $structure_no_space = trim($structure, ' ');
         $structure = (strlen($structure_no_space)) ? $structure_no_space : '{{ user.name }}, {{ user.username }}, {{ user.email }}, {{ withdraw.amount }}, {{ user.id }}, {{ subscription.withdraw_id }}, {{ user.id }} ';
 
-        $subscriber_obj = $subscriber->getUserSubscriptionInfo($withdraw->user_id);
+        $user_obj = $paymentsModel->getUser($withdraw->user_id);
         $user = $factory->getRecord('#__users_users', 'uu', array('uu.id=:id'), array('id' => $withdraw->user_id));
+        $gateway = $this->getWithdrawGatewaySetting($user->id, $withdraw->gateway_id);
 
         $tmp_array['withdraw'] = $withdraw;
+        $tmp_array['gateway'] = $gateway;
         $tmp_array['user'] = $user;
-        $tmp_array['subscription'] = $subscriber_obj;
+        $tmp_array['subscription'] = $user_obj;
 
         $withdraw_str = $factory->renderString($structure, $tmp_array);
 
@@ -154,6 +156,23 @@ class MasspayModel extends BaseModel {
         $data_obj->token = $unique_id;
 
         $factory->saveRecord('#__withdraws_withdraws', $data_obj);
+    }
+
+    public function getWithdrawGatewaySetting($user_id, $gateway_id) {
+
+        $factory = new KazistFactory();
+
+        $query = $factory->getQueryBuilder('#__withdraws_settings_gateways', 'wsg');
+        $query->addSelect('pg.short_name, pg.long_name ');
+        $query->where('wsg.user_id=:user_id');
+        $query->setParameter('user_id', (int) $user_id);
+        $query->where('wsg.gateway_id=:gateway_id');
+        $query->setParameter('gateway_id', (int) $gateway_id);
+        $record = $query->loadObject();
+
+        $record->params = json_decode($record->params, true);
+
+        return $record;
     }
 
     public function getTotalWithdraws($gateway_id) {
@@ -224,9 +243,9 @@ class MasspayModel extends BaseModel {
 
 
         $query = new Query();
-        $query->select('fg.*');
+        $query->select('pg.*');
         $query->from('#__payments_gateways', 'pg');
-        $query->where('fg.can_withdraw=1');
+        $query->where('pg.can_withdraw=1');
 
         $records = $query->loadObjectList();
 

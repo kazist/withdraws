@@ -1,5 +1,5 @@
-Withdraws\Settings\Code\Tables\Settings:
-  table: withdraws_settings
+Withdraws\Settings\Gateways\Code\Tables\Gateways:
+  table: withdraws_settings_gateways
   type: entity
   id:
     id:
@@ -11,16 +11,30 @@ Withdraws\Settings\Code\Tables\Settings:
       type: integer
       length: 11
       nullable: false
-    id_passport:
-      name: id_passport
-      type: string
-      length: 255
+    gateway_id:
+      name: gateway_id
+      type: integer
+      length: 11
       nullable: false
-    pin:
-      name: pin
-      type: string
-      length: 255
-      nullable: false
+    is_valid:
+      name: is_valid
+      type: integer
+      length: 11
+      nullable: true
+    is_default:
+      name: is_default
+      type: integer
+      length: 11
+      nullable: true
+    published:
+      name: published
+      type: integer
+      length: 11
+      nullable: true
+    params:
+      name: params
+      type: text
+      nullable: true
     created_by:
       name: created_by
       type: integer
@@ -42,6 +56,8 @@ Withdraws\Settings\Code\Tables\Settings:
   indexes:
     user_id_index:
       columns: [user_id]
+    gateway_id_index:
+      columns: [gateway_id]
   lifecycleCallbacks:
     prePersist:
       - onPrePersist

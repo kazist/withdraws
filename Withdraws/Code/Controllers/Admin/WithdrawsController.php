@@ -42,11 +42,11 @@ class WithdrawsController extends BaseController {
 
         $item = $this->model->getRecord();
         $gateways = $this->model->getWithdrawGateways();
-        $subscriber = $this->model->getSubscriber();
+        $user = $this->model->getUser();
 
         $data_arr['item'] = $item;
         $data_arr['gateways'] = $gateways;
-        $data_arr['subscriber'] = $subscriber;
+        $data_arr['user'] = $user;
         $data_arr['minimum_amount'] = $minimum_amount;
 
         $this->html = $this->render('Withdraws:Withdraws:Code:views:admin:edit.index.twig', $data_arr);

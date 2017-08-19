@@ -1,0 +1,13 @@
+{
+    "title": "Withdraws",
+    "alias": "withdraws",
+    "groups": [{
+            "title": "Withdraws Setting",
+            "settings": [{
+                    "name": "withdraws_withdraw_minimum_amount",
+                    "label": "Minimum Amount",
+                    "default": "10",
+                    "type": "text"
+                }]
+        }]
+}

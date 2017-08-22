@@ -41,7 +41,7 @@ class MasspayController extends BaseController {
         $this->model = new MasspayModel();
         $this->model->generateMasspay();
 
-        return $this->redirectToRoute('admin.withdraws.masspay');
+        return $this->json($data);
     }
 
 }

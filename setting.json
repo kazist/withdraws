@@ -7,6 +7,13 @@
                     "name": "withdraws_withdraw_minimum_amount",
                     "label": "Minimum Amount",
                     "default": "10",
+                    "tooltip": "Set minimum withdraw limit.",
+                    "type": "text"
+                }, {
+                    "name": "withdraws_withdraw_withheld_amount",
+                    "label": "Withheld Amount",
+                    "default": "10",
+                    "tooltip": "Set amount to be withheld on every withdraw.",
                     "type": "text"
                 }]
         }]

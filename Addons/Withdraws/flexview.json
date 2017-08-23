@@ -4,9 +4,9 @@
         "show_title": "1",
         "unique_name": "withdraws.addons.withdraws",
         "icon": "fa-user",
-        "homepage": "0",
+        "homepage": "1",
         "allpages": "0",
-        "extensionpages": "1",
+        "extensionpages": "0",
         "viewside": "backend",
         "explanation": "",
         "description": "",
@@ -22,9 +22,9 @@
         "show_title": "1",
         "unique_name": "withdraws.addons.withdrawsetting",
         "icon": "fa-user",
-        "homepage": "0",
+        "homepage": "1",
         "allpages": "0",
-        "extensionpages": "1",
+        "extensionpages": "0",
         "viewside": "backend",
         "explanation": "",
         "description": "",
@@ -33,6 +33,5 @@
         "main_content": "",
         "positions": ["top_left"],
         "setting": []
-
     }
 ]

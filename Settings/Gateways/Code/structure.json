@@ -19,7 +19,8 @@
                                             "fields": [
                                                 "user_id",
                                                 "gateway_id",
-                                                "params"
+                                                "params",
+                                                "setting_id"
                                             ]
                                         }
                                     }
@@ -38,7 +39,6 @@
                                             "hide_on_new": 0,
                                             "fields": [
                                                 "is_valid",
-                                                "is_default",
                                                 "published"
                                             ]
                                         }
@@ -65,18 +65,25 @@
                 ]
             },
             "ommitted": [
-                "id"
+                "id",
+                "is_default"
             ]
         },
         "table": {
             "fields": [
                 "user_id",
                 "gateway_id",
+                "setting_id",
+                "params",
+                "is_valid",
                 "published"
             ],
             "has_label": [
                 "user_id",
                 "gateway_id",
+                "setting_id",
+                "params",
+                "is_valid",
                 "published"
             ]
         }
@@ -179,6 +186,67 @@
         },
         {
             "dropdown_filter": "0",
+            "nullable": "0",
+            "name": "setting_id",
+            "html_type": "autocomplete",
+            "mysql_type": "int",
+            "view_side": "",
+            "index": "",
+            "id_name": "",
+            "class_name": "",
+            "default_value": "",
+            "size": "",
+            "readonly": "0",
+            "format_value": "",
+            "parameters": {
+                "general": [],
+                "source": {
+                    "data_source": "db_table",
+                    "join_field": "id",
+                    "display_field": [
+                        "pin",
+                        " id_passport"
+                    ],
+                    "join_table_name": "withdraws_settings"
+                },
+                "save": {
+                    "view_side": "both",
+                    "index": ""
+                },
+                "media": [],
+                "payment": []
+            }
+        },
+        {
+            "dropdown_filter": "0",
+            "nullable": "1",
+            "name": "params",
+            "html_type": "textarea",
+            "mysql_type": "text",
+            "view_side": "",
+            "index": "",
+            "id_name": "",
+            "class_name": "",
+            "default_value": "",
+            "size": "",
+            "readonly": "0",
+            "format_value": "",
+            "parameters": {
+                "general": {
+                    "col": "",
+                    "row": ""
+                },
+                "source": [],
+                "save": {
+                    "view_side": "both",
+                    "index": ""
+                },
+                "media": [],
+                "payment": []
+            }
+        },
+        {
+            "dropdown_filter": "0",
             "nullable": "1",
             "name": "is_valid",
             "html_type": "yesno",
@@ -243,34 +311,6 @@
             "format_value": "",
             "parameters": {
                 "general": [],
-                "source": [],
-                "save": {
-                    "view_side": "both",
-                    "index": ""
-                },
-                "media": [],
-                "payment": []
-            }
-        },
-        {
-            "dropdown_filter": "0",
-            "nullable": "1",
-            "name": "params",
-            "html_type": "textarea",
-            "mysql_type": "text",
-            "view_side": "",
-            "index": "",
-            "id_name": "",
-            "class_name": "",
-            "default_value": "",
-            "size": "",
-            "readonly": "0",
-            "format_value": "",
-            "parameters": {
-                "general": {
-                    "col": "",
-                    "row": ""
-                },
                 "source": [],
                 "save": {
                     "view_side": "both",
@@ -410,10 +450,13 @@
             "uu.name AS user_id_name",
             "wsg.gateway_id",
             "pg.long_name AS gateway_id_long_name",
+            "wsg.setting_id",
+            "ws.pin AS setting_id_pin",
+            "ws.id_passport AS setting_id_id_passport",
+            "wsg.params",
             "wsg.is_valid",
             "wsg.is_default",
             "wsg.published",
-            "wsg.params",
             "wsg.created_by",
             "wsg.date_created",
             "wsg.modified_by",
@@ -431,6 +474,12 @@
                 "alias": "pg",
                 "name": "#__payments_gateways",
                 "on": "wsg.gateway_id = pg.id"
+            },
+            {
+                "table": "Withdraws\\Settings\\Code\\Tables\\Settings",
+                "alias": "ws",
+                "name": "#__withdraws_settings",
+                "on": "wsg.setting_id = ws.id"
             }
         ]
     }

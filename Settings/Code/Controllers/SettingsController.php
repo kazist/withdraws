@@ -23,9 +23,9 @@ class SettingsController extends BaseController {
 
     public function addAction() {
 
-        $setting = $this->model->getWithdrawSetting();
-
-        if (is_object($setting)) {
+        $setting_id = $this->model->getWithdrawSetting();
+     
+        if ($setting_id) {
             return $this->redirectToRoute('withdraws.settings.edit', array('id' => $setting_id));
         }
 
@@ -42,7 +42,7 @@ class SettingsController extends BaseController {
             $setting_id = $this->model->getWithdrawSetting();
             return $this->redirectToRoute('withdraws.settings.edit', array('id' => $setting_id));
         }
-        
+
         $gateways = $this->model->getWithdrawGateways();
 
         $this->data_arr['gateways'] = $gateways;

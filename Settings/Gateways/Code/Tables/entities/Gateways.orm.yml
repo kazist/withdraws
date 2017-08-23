@@ -16,6 +16,15 @@ Withdraws\Settings\Gateways\Code\Tables\Gateways:
       type: integer
       length: 11
       nullable: false
+    setting_id:
+      name: setting_id
+      type: integer
+      length: 11
+      nullable: false
+    params:
+      name: params
+      type: text
+      nullable: true
     is_valid:
       name: is_valid
       type: integer
@@ -30,10 +39,6 @@ Withdraws\Settings\Gateways\Code\Tables\Gateways:
       name: published
       type: integer
       length: 11
-      nullable: true
-    params:
-      name: params
-      type: text
       nullable: true
     created_by:
       name: created_by
@@ -58,6 +63,8 @@ Withdraws\Settings\Gateways\Code\Tables\Gateways:
       columns: [user_id]
     gateway_id_index:
       columns: [gateway_id]
+    setting_id_index:
+      columns: [setting_id]
   lifecycleCallbacks:
     prePersist:
       - onPrePersist

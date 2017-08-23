@@ -19,7 +19,7 @@ class WithdrawsModel {
 
         $factory = new KazistFactory();
 
-        $query = $factory->getQueryBuilder('#__withdraws_withdraws', 'ww');
+        $query = $factory->getQueryBuilder('#__withdraws_withdraws', 'ww', array('ww.paid_status IS NUll OR ww.paid_status = \'\''));
 
         $query->setFirstResult(0);
         $query->setMaxResults(10);
@@ -33,8 +33,9 @@ class WithdrawsModel {
 
         $factory = new KazistFactory();
 
-        $query = $factory->getQueryBuilder('#__withdraws_settings', 'wws');
-
+        $query = $factory->getQueryBuilder('#__withdraws_settings_gateways', 'wsg', array('wsg.is_valid IS NUll OR wsg.is_valid = \'\''));
+        $query->addSelect('ws.pin');
+        $query->addSelect('ws.id_passport');
         $query->setFirstResult(0);
         $query->setMaxResults(10);
 

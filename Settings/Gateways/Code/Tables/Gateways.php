@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Gateways
  *
- * @ORM\Table(name="withdraws_settings_gateways", indexes={@ORM\Index(name="user_id_index", columns={"user_id"}), @ORM\Index(name="gateway_id_index", columns={"gateway_id"})})
+ * @ORM\Table(name="withdraws_settings_gateways", indexes={@ORM\Index(name="user_id_index", columns={"user_id"}), @ORM\Index(name="gateway_id_index", columns={"gateway_id"}), @ORM\Index(name="setting_id_index", columns={"setting_id"})})
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks
  */
@@ -39,6 +39,20 @@ class Gateways extends \Kazist\Table\BaseTable
     /**
      * @var integer
      *
+     * @ORM\Column(name="setting_id", type="integer", length=11, nullable=false)
+     */
+    protected $setting_id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="params", type="text", nullable=true)
+     */
+    protected $params;
+
+    /**
+     * @var integer
+     *
      * @ORM\Column(name="is_valid", type="integer", length=11, nullable=true)
      */
     protected $is_valid;
@@ -56,13 +70,6 @@ class Gateways extends \Kazist\Table\BaseTable
      * @ORM\Column(name="published", type="integer", length=11, nullable=true)
      */
     protected $published;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="params", type="text", nullable=true)
-     */
-    protected $params;
 
     /**
      * @var integer
@@ -152,6 +159,54 @@ class Gateways extends \Kazist\Table\BaseTable
     }
 
     /**
+     * Set settingId
+     *
+     * @param integer $settingId
+     *
+     * @return Gateways
+     */
+    public function setSettingId($settingId)
+    {
+        $this->setting_id = $settingId;
+
+        return $this;
+    }
+
+    /**
+     * Get settingId
+     *
+     * @return integer
+     */
+    public function getSettingId()
+    {
+        return $this->setting_id;
+    }
+
+    /**
+     * Set params
+     *
+     * @param string $params
+     *
+     * @return Gateways
+     */
+    public function setParams($params)
+    {
+        $this->params = $params;
+
+        return $this;
+    }
+
+    /**
+     * Get params
+     *
+     * @return string
+     */
+    public function getParams()
+    {
+        return $this->params;
+    }
+
+    /**
      * Set isValid
      *
      * @param integer $isValid
@@ -221,30 +276,6 @@ class Gateways extends \Kazist\Table\BaseTable
     public function getPublished()
     {
         return $this->published;
-    }
-
-    /**
-     * Set params
-     *
-     * @param string $params
-     *
-     * @return Gateways
-     */
-    public function setParams($params)
-    {
-        $this->params = $params;
-
-        return $this;
-    }
-
-    /**
-     * Get params
-     *
-     * @return string
-     */
-    public function getParams()
-    {
-        return $this->params;
     }
 
     /**

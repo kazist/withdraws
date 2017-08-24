@@ -6,7 +6,7 @@
 {% set withdraw_amount = 0 %}
 {% set available_amount = user.money_in - user.money_out %}
 
-<h1> Withdraw Fund</h1>
+<h1 class="component-header"> Withdraw Fund</h1>
 <hr>
 
 <form id="{{ main_form_id }}" class="form-horizontal" action="{{ generate_url('withdraws.withdraws.save') }}" method="post" role="form"  enctype="multipart/form-data">

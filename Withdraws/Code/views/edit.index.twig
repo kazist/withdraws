@@ -4,7 +4,7 @@
 
 {% set available_amount = user.money_in - user.money_out %}
 
-<h1> Withdrawal Fund</h1>
+<h1 class="component-header"> Withdrawal Fund</h1>
 <hr>
 
 <form id="{{ main_form_id }}" class="form-horizontal" action="{{ generate_url('withdraws.withdraws.invoice') }}" method="post" role="form"  enctype="multipart/form-data">

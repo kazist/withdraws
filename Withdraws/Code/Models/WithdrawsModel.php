@@ -180,6 +180,12 @@ class WithdrawsModel extends BaseModel {
         $records = $query->loadObjectList();
 
         foreach ($records as $key => $record) {
+
+            if (!$record->gateway_id) {
+                unset($records[$key]);
+                continue;
+            }
+
             $records[$key]->params = json_decode($record->params, true);
         }
 

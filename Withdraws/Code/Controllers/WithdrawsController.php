@@ -40,8 +40,10 @@ class WithdrawsController extends BaseController {
         $user = $this->model->getUser();
 
         $minimum_amount = $factory->getSetting('withdraws_withdraw_minimum_amount');
+        $withheld_amount = $factory->getSetting('withdraws_withdraw_withheld_amount');
+        $reversed_amount = $minimum_amount + $withheld_amount;
 
-        if ($form['amount'] >= $minimum_amount && $user->money_in >= $form['amount']) {
+        if ($form['amount'] >= $minimum_amount && $user->money_in >= $reversed_amount) {
             $this->return_url = 'withdraws.withdraws';
             return parent::saveAction($form);
         } else {
@@ -55,6 +57,7 @@ class WithdrawsController extends BaseController {
         $factory = new KazistFactory();
 
         $minimum_amount = $factory->getSetting('withdraws_withdraw_minimum_amount');
+        $withheld_amount = $factory->getSetting('withdraws_withdraw_withheld_amount');
 
         $this->model = new WithdrawsModel();
 
@@ -73,6 +76,7 @@ class WithdrawsController extends BaseController {
         $data_arr['setting'] = $setting;
         $data_arr['user'] = $user;
         $data_arr['minimum_amount'] = $minimum_amount;
+        $data_arr['withheld_amount'] = $withheld_amount;
 
         $this->html = $this->render('Withdraws:Withdraws:Code:views:edit.index.twig', $data_arr);
 

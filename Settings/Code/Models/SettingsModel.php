@@ -127,6 +127,7 @@ class SettingsModel extends BaseModel {
                 $data = new \stdClass();
                 $data->user_id = $user->id;
                 $data->gateway_id = $gateway_id;
+                $data->setting_id = $id;
                 $exist_obj = clone $data;
                 $data->params = $params_encode;
 

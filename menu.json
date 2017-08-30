@@ -6,7 +6,7 @@
             "url": "admin/withdraws/withdraws",
             "icon": "fa fa-money",
             "children": [{
-                    "title": "Transfers",
+                    "title": "Withdraws Settings",
                     "alias": "admin_withdraws_settings",
                     "url": "admin/withdraws/settings",
                     "icon": "fa fa-money",

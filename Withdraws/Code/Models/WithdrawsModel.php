@@ -112,7 +112,7 @@ class WithdrawsModel extends BaseModel {
                 $data_obj->description = ($key) ? $param->title . ' For ' . $parent_id : 'Fund Withdrawal To ' . $user->username;
                 $data_obj->item_id = $withdraw_id;
                 $data_obj->rate_id = $param->id;
-                $data_obj->source = 'withdraw';
+                $data_obj->payment_source = 'withdraws.withdraws';
                 $data_obj->debit = $param->amount;
                 $data_obj->type = 'fund-withdraw';
 

@@ -32,9 +32,9 @@
         <div class="col-md-9">
             <div class="form-group payment-gateways-group">
 
-                <label for="payment-gateways" class="col-sm-3 control-label">Payment Gateway</label>
+                <label for="payment-gateways" class="col-sm-12">Payment Gateway</label>
 
-                <div class="col-sm-9 kazicode-form-field ">
+                <div class="col-sm-12">
 
                     {% for gateway in gateways %}
                         <input class="selected_gateways" type="checkbox" name="form[selected_gateways][]" value="{{ gateway.id }}" short_name="{{ gateway.short_name }}" {% if gateway.selected %}checked="checked"{% endif %}>
@@ -50,9 +50,9 @@
 
                                         {% set param_field_name = 'gateways.' ~ gateway.id ~ '.params.' ~ setting.name %}
 
-                                        <div class="col-sm-6">
-                                            <label for="{{ setting.name }}" class="col-sm-12">{{ setting.label }}</label>
-                                            <div class="col-sm-12 kazicode-form-field ">
+                                        <div class="col-sm-12">
+                                            <label for="{{ setting.name }}" class="col-sm-3">{{ setting.label }}</label>
+                                            <div class="col-sm-9 kazicode-form-field ">
                                                 {{ forms.input(param_field_name , setting.type, setting.value, null, null, null, null, null, setting.options) }}
                                                 {% if setting.tooltip %}
                                                     <i class="fa fa-info-circle"></i>

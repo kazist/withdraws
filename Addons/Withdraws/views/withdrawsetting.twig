@@ -9,7 +9,7 @@
                 <tr>
                     <th align="left">User</th>
                     <th>Gateway</th>
-                    <th>Withdraw ID</th>
+                    <th>Params</th>
                     <th>Accepted</th>
                 </tr>
             </thead> 
@@ -20,7 +20,7 @@
                         <tr>
                             <td>{{ item.user_id_name }}</td>
                             <td>{{ item.gateway_id_long_name }}</td>
-                            <td>{{ item.withdraw_id }}</td>
+                            <td>{{ item.params }}</td>
                             <td> {% if item.is_valid %}
                                 <label class="label label-default">Yes</label>
                             {% else %}

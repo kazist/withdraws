@@ -113,14 +113,14 @@ class SettingsModel extends BaseModel {
         $selected_gateways = $form_data['selected_gateways'];
         $gateways = $form_data['gateways'];
         $form_data['user_id'] = $user->id;
-
+        
         unset($form_data['selected_gateways']);
         unset($form_data['gateways']);
 
         $id = parent::save($form_data);
 
-        foreach ($selected_gateways as $gateway_id => $selected_gateway) {
-            foreach ($gateways[$selected_gateway] as $key => $params) {
+        foreach ($selected_gateways as $gateway_id) {
+            foreach ($gateways[$gateway_id] as $key => $params) {
 
                 $params_encode = json_encode($params);
 
@@ -130,7 +130,7 @@ class SettingsModel extends BaseModel {
                 $data->setting_id = $id;
                 $exist_obj = clone $data;
                 $data->params = $params_encode;
-
+       
                 $factory->saveRecord('#__withdraws_settings_gateways', $data, array('user_id=:user_id', 'gateway_id=:gateway_id'), $exist_obj);
             }
         }

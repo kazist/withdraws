@@ -102,11 +102,14 @@ class WithdrawsController extends BaseController {
             return $this->redirectToRoute('withdraws.withdraws.add');
         }
 
+        $data_arr['description'] = 'Withdraw $' . number_format($form['amount'], 2) . ' to ' . $user->name;
         $data_arr['rates'] = $rates;
         $data_arr['rates_json'] = json_encode($rates);
         $data_arr['form'] = $form;
         $data_arr['user'] = $user;
         $data_arr['minimum_amount'] = $minimum_amount;
+        $rates_arr = array_reverse($rates);
+        $data_arr['total_rate'] = $rates_arr[0];
 
         $this->html = $this->render('Withdraws:Withdraws:Code:views:invoice.index.twig', $data_arr);
 

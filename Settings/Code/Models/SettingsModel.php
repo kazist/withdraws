@@ -52,7 +52,7 @@ class SettingsModel extends BaseModel {
         $query = $factory->getQueryBuilder('#__payments_gateways', 'wg');
         $query->where('wg.can_withdraw=1');
         $records = $query->loadObjectList();
-
+ 
         foreach ($records as $key => $record) {
 
             $is_allowed = $paymentsModel->getIsAllowedInCountry($record->id);
@@ -60,7 +60,7 @@ class SettingsModel extends BaseModel {
             $count_allowed = $paymentsModel->getCountIsAllowedIn($record->id);
 
             $param_json = JPATH_ROOT . 'applications/' . $record->form_path . '/param.json';
-
+           
             if (($count_allowed && !$is_allowed) || $is_notallowed) {
                 unset($records[$key]);
             }
@@ -113,7 +113,7 @@ class SettingsModel extends BaseModel {
         $selected_gateways = $form_data['selected_gateways'];
         $gateways = $form_data['gateways'];
         $form_data['user_id'] = $user->id;
-        
+
         unset($form_data['selected_gateways']);
         unset($form_data['gateways']);
 
@@ -130,7 +130,7 @@ class SettingsModel extends BaseModel {
                 $data->setting_id = $id;
                 $exist_obj = clone $data;
                 $data->params = $params_encode;
-       
+
                 $factory->saveRecord('#__withdraws_settings_gateways', $data, array('user_id=:user_id', 'gateway_id=:gateway_id'), $exist_obj);
             }
         }

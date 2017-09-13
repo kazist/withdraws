@@ -181,7 +181,7 @@ class WithdrawsModel extends BaseModel {
 
         foreach ($records as $key => $record) {
 
-            if (!$record->gateway_id) {
+            if (!$record->gateway_id || $record->gateway_id_long_name == '') {
                 unset($records[$key]);
                 continue;
             }

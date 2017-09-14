@@ -50,7 +50,7 @@
                         <tr >
                             <td>{{ item.gateway_id_long_name }}</td>
                             <td>{% if item.paid_status %}Yes{% else %}No{% endif %}  </td>
-                            <td>{{ item.date_created ? item.date_created|date('d M Y H:i:s') }}</td>
+                            <td>{{ item.date_created ? item.date_created|date('d M Y H:i:s',  document.timezone) }}</td>
                             <td align="right">{{ item.amount|number_format(2) }}</td>
                         </tr>
                     {% endfor %}

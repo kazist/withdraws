@@ -61,7 +61,7 @@
                                 {% endif %} 
                             </td>
                             <td align="right">{{ item.amount|number_format(2) }}</td>
-                            <td align="right">{{ item.date_created ? item.date_created|date('d M Y H:i:s') }}</td>
+                            <td align="right">{{ item.date_created ? item.date_created|date('d M Y H:i:s',  document.timezone) }}</td>
                         </tr>
                     {% endfor %}
                 {% endif %}

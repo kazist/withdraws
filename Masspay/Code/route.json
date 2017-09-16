@@ -1,7 +1,7 @@
 {
     "frontend": [{
-            "title": "Candidate Analyzer",
-            "description": "Candidate Analyzer",
+            "title": "Generate Masspay",
+            "description": "Generate Masspay",
             "controller": "Withdraws\\Masspay\\Code\\Controllers\\MasspayController::generatemasspayAction",
             "unique_name": "withdraws.masspay.generatemasspay",
             "route": "withdraws/masspay/generatemasspay",

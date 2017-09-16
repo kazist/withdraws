@@ -189,7 +189,7 @@ class WithdrawsModel extends BaseModel {
             $records[$key]->params = json_decode($record->params, true);
         }
 
-        if (!$records[0]->is_default) {
+        if (!empty($records) && !$records[0]->is_default) {
             $records[0]->is_default = 1;
         }
 

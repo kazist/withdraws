@@ -68,7 +68,7 @@ class WithdrawsController extends BaseController {
 
         if (empty($gateways)) {
             $factory->enqueueMessage(' Please provide all financial details in order to proceed with withdrawal.', 'error');
-            return $this->redirectToRoute('withdraws.settings.edit', array('user_id' => $user->id));
+            return $this->redirectToRoute('withdraws.settings.add');
         }
 
         $data_arr['item'] = $item;

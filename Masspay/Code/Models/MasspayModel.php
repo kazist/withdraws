@@ -71,7 +71,7 @@ class MasspayModel extends BaseModel {
         if ($total_withdraws) {
 
             $withdraws = $this->getWithdraws($gateway->id, $gateway->file_limit);
-
+      
             $unique_id = substr(uniqid(), -7);
             $this->prepareFile($unique_id, $gateway->short_name, $gateway->file_type);
             file_put_contents($this->file_path, $gateway->withdraw_file_prefix . PHP_EOL, FILE_APPEND | LOCK_EX);
@@ -144,6 +144,7 @@ class MasspayModel extends BaseModel {
 
         $tmp_array['withdraw'] = $withdraw;
         $tmp_array['gateway'] = $gateway;
+        $tmp_array['setting'] = $gateway;
         $tmp_array['user'] = $user;
         $tmp_array['subscription'] = $user_obj;
 
@@ -163,7 +164,7 @@ class MasspayModel extends BaseModel {
         $factory = new KazistFactory();
 
         $query = $factory->getQueryBuilder('#__withdraws_settings_gateways', 'wsg');
-        $query->addSelect('pg.short_name, pg.long_name ');
+        $query->addSelect('pg.short_name, pg.long_name, ws.pin, ws.id_passport ');
         $query->where('wsg.user_id=:user_id');
         $query->setParameter('user_id', (int) $user_id);
         $query->where('wsg.gateway_id=:gateway_id');

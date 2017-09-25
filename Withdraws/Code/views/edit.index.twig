@@ -2,7 +2,6 @@
 
 {{ set_assets('applications/Withdraws/assets/js/withdraws.js') }}
 
-{% set available_amount = user.money_in - user.money_out %}
 {% set reversed_amount = minimum_amount + withheld_amount %}
 
 <h1 class="component-header"> Withdrawal Fund</h1>

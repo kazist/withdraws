@@ -166,6 +166,22 @@ class WithdrawsModel extends BaseModel {
         return $record;
     }
 
+    public function getAvailableAmount($user = '') {
+        $factory = new KazistFactory();
+
+        $user = (is_object($user)) ? $user : $this->getUser();
+
+        $query = $factory->getQueryBuilder('#__payments_transactions', 'pt');
+        $query->select('SUM(pt.credit) AS credit, SUM(pt.debit) AS debit');
+        $query->where('pt.payment_source <> :payment_source');
+        $query->setParameter('payment_source', 'payments.deposits');
+        $query->where('pt.user_id = :user_id');
+        $query->setParameter('user_id', (int) $user->id);
+        $record = $query->loadObject();
+ 
+        return $record->credit-$record->debit;
+    }
+
     public function getWithdrawGateways($user = '') {
 
         $factory = new KazistFactory();

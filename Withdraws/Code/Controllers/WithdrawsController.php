@@ -63,6 +63,7 @@ class WithdrawsController extends BaseController {
 
         $item = $this->model->getRecord();
         $user = $this->model->getUser();
+        $available_amount = $this->model->getAvailableAmount($user);
         $gateways = $this->model->getWithdrawGateways($user);
         $setting = $this->model->getWithdrawSetting($user);
 
@@ -71,6 +72,7 @@ class WithdrawsController extends BaseController {
             return $this->redirectToRoute('withdraws.settings.add');
         }
 
+        $data_arr['available_amount'] = $available_amount;
         $data_arr['item'] = $item;
         $data_arr['gateways'] = $gateways;
         $data_arr['setting'] = $setting;

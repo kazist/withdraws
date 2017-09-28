@@ -11,8 +11,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks
  */
-class Withdraws extends \Kazist\Table\BaseTable {
-
+class Withdraws extends \Kazist\Table\BaseTable
+{
     /**
      * @var integer
      *
@@ -37,9 +37,9 @@ class Withdraws extends \Kazist\Table\BaseTable {
     protected $gateway_id;
 
     /**
-     * @var integer
+     * @var string
      *
-     * @ORM\Column(name="amount", type="integer", length=11, nullable=false)
+     * @ORM\Column(name="amount", type="decimal", precision=11, scale=2, nullable=false)
      */
     protected $amount;
 
@@ -113,64 +113,74 @@ class Withdraws extends \Kazist\Table\BaseTable {
      */
     protected $date_modified;
 
+
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
     }
 
     /**
-     * Set user_id
+     * Set userId
      *
      * @param integer $userId
+     *
      * @return Withdraws
      */
-    public function setUserId($userId) {
+    public function setUserId($userId)
+    {
         $this->user_id = $userId;
 
         return $this;
     }
 
     /**
-     * Get user_id
+     * Get userId
      *
-     * @return integer 
+     * @return integer
      */
-    public function getUserId() {
+    public function getUserId()
+    {
         return $this->user_id;
     }
 
     /**
-     * Set gateway_id
+     * Set gatewayId
      *
      * @param integer $gatewayId
+     *
      * @return Withdraws
      */
-    public function setGatewayId($gatewayId) {
+    public function setGatewayId($gatewayId)
+    {
         $this->gateway_id = $gatewayId;
 
         return $this;
     }
 
     /**
-     * Get gateway_id
+     * Get gatewayId
      *
-     * @return integer 
+     * @return integer
      */
-    public function getGatewayId() {
+    public function getGatewayId()
+    {
         return $this->gateway_id;
     }
 
     /**
      * Set amount
      *
-     * @param integer $amount
+     * @param string $amount
+     *
      * @return Withdraws
      */
-    public function setAmount($amount) {
+    public function setAmount($amount)
+    {
         $this->amount = $amount;
 
         return $this;
@@ -179,9 +189,10 @@ class Withdraws extends \Kazist\Table\BaseTable {
     /**
      * Get amount
      *
-     * @return integer 
+     * @return string
      */
-    public function getAmount() {
+    public function getAmount()
+    {
         return $this->amount;
     }
 
@@ -189,9 +200,11 @@ class Withdraws extends \Kazist\Table\BaseTable {
      * Set currency
      *
      * @param string $currency
+     *
      * @return Withdraws
      */
-    public function setCurrency($currency) {
+    public function setCurrency($currency)
+    {
         $this->currency = $currency;
 
         return $this;
@@ -200,9 +213,10 @@ class Withdraws extends \Kazist\Table\BaseTable {
     /**
      * Get currency
      *
-     * @return string 
+     * @return string
      */
-    public function getCurrency() {
+    public function getCurrency()
+    {
         return $this->currency;
     }
 
@@ -210,9 +224,11 @@ class Withdraws extends \Kazist\Table\BaseTable {
      * Set description
      *
      * @param string $description
+     *
      * @return Withdraws
      */
-    public function setDescription($description) {
+    public function setDescription($description)
+    {
         $this->description = $description;
 
         return $this;
@@ -221,51 +237,58 @@ class Withdraws extends \Kazist\Table\BaseTable {
     /**
      * Get description
      *
-     * @return string 
+     * @return string
      */
-    public function getDescription() {
+    public function getDescription()
+    {
         return $this->description;
     }
 
     /**
-     * Set paid_status
+     * Set paidStatus
      *
      * @param integer $paidStatus
+     *
      * @return Withdraws
      */
-    public function setPaidStatus($paidStatus) {
+    public function setPaidStatus($paidStatus)
+    {
         $this->paid_status = $paidStatus;
 
         return $this;
     }
 
     /**
-     * Get paid_status
+     * Get paidStatus
      *
-     * @return integer 
+     * @return integer
      */
-    public function getPaidStatus() {
+    public function getPaidStatus()
+    {
         return $this->paid_status;
     }
 
     /**
-     * Set is_canceled
+     * Set isCanceled
      *
      * @param integer $isCanceled
+     *
      * @return Withdraws
      */
-    public function setIsCanceled($isCanceled) {
+    public function setIsCanceled($isCanceled)
+    {
         $this->is_canceled = $isCanceled;
 
         return $this;
     }
 
     /**
-     * Get is_canceled
+     * Get isCanceled
      *
-     * @return integer 
+     * @return integer
      */
-    public function getIsCanceled() {
+    public function getIsCanceled()
+    {
         return $this->is_canceled;
     }
 
@@ -273,9 +296,11 @@ class Withdraws extends \Kazist\Table\BaseTable {
      * Set token
      *
      * @param string $token
+     *
      * @return Withdraws
      */
-    public function setToken($token) {
+    public function setToken($token)
+    {
         $this->token = $token;
 
         return $this;
@@ -284,9 +309,10 @@ class Withdraws extends \Kazist\Table\BaseTable {
     /**
      * Get token
      *
-     * @return string 
+     * @return string
      */
-    public function getToken() {
+    public function getToken()
+    {
         return $this->token;
     }
 
@@ -294,9 +320,11 @@ class Withdraws extends \Kazist\Table\BaseTable {
      * Set params
      *
      * @param string $params
+     *
      * @return Withdraws
      */
-    public function setParams($params) {
+    public function setParams($params)
+    {
         $this->params = $params;
 
         return $this;
@@ -305,46 +333,58 @@ class Withdraws extends \Kazist\Table\BaseTable {
     /**
      * Get params
      *
-     * @return string 
+     * @return string
      */
-    public function getParams() {
+    public function getParams()
+    {
         return $this->params;
     }
 
     /**
-     * Get created_by
+     * Get createdBy
      *
-     * @return integer 
+     * @return integer
      */
-    public function getCreatedBy() {
+    public function getCreatedBy()
+    {
         return $this->created_by;
     }
 
     /**
-     * Get date_created
+     * Get dateCreated
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
-    public function getDateCreated() {
+    public function getDateCreated()
+    {
         return $this->date_created;
     }
 
     /**
-     * Get modified_by
+     * Get modifiedBy
      *
-     * @return integer 
+     * @return integer
      */
-    public function getModifiedBy() {
+    public function getModifiedBy()
+    {
         return $this->modified_by;
     }
 
     /**
-     * Get date_modified
+     * Get dateModified
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
-    public function getDateModified() {
+    public function getDateModified()
+    {
         return $this->date_modified;
     }
-
+    /**
+     * @ORM\PreUpdate
+     */
+    public function onPreUpdate()
+    {
+        // Add your code here
+    }
 }
+

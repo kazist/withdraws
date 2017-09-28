@@ -3,11 +3,11 @@
     "title": "Withdraws List",
     "explanation": "Withdraws List",
     "description": "Withdraws List",
-    "version": 24,
+    "version": 25,
     "has_view": "1",
     "tie_field": "0",
     "email_on_new": "0",
     "email_on_edit": "0",
     "email_on_delete": "0",
-    "date_file_modified": "2016-05-04 15:51:40"
+    "date_file_modified": "2017-09-28 02:58:50"
 }

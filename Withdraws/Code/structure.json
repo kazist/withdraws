@@ -95,20 +95,17 @@
         }
     },
     "rights": {
-        "tab": [
-        ],
+        "tab": [],
         "group": [
             "modification_detail"
         ],
-        "field": [
-        ]
+        "field": []
     },
-    "customhtmls": [
-    ],
+    "customhtmls": [],
     "fields": [
         {
             "dropdown_filter": "0",
-            "nullable": "0",
+            "nullable": "1",
             "name": "id",
             "html_type": "text",
             "mysql_type": "int",
@@ -121,17 +118,13 @@
             "readonly": "",
             "format_value": "",
             "parameters": {
-                "general": [
-                ],
-                "source": [
-                ],
+                "general": [],
+                "source": [],
                 "save": {
                     "index": ""
                 },
-                "media": [
-                ],
-                "payment": [
-                ]
+                "media": [],
+                "payment": []
             }
         },
         {
@@ -149,8 +142,7 @@
             "readonly": "0",
             "format_value": "",
             "parameters": {
-                "general": [
-                ],
+                "general": [],
                 "source": {
                     "data_source": "db_table",
                     "join_field": "id",
@@ -162,10 +154,8 @@
                 "save": {
                     "index": ""
                 },
-                "media": [
-                ],
-                "payment": [
-                ]
+                "media": [],
+                "payment": []
             }
         },
         {
@@ -183,8 +173,7 @@
             "readonly": "0",
             "format_value": "",
             "parameters": {
-                "general": [
-                ],
+                "general": [],
                 "source": {
                     "data_source": "db_table",
                     "join_field": "id",
@@ -196,10 +185,8 @@
                 "save": {
                     "index": ""
                 },
-                "media": [
-                ],
-                "payment": [
-                ]
+                "media": [],
+                "payment": []
             }
         },
         {
@@ -207,7 +194,7 @@
             "nullable": "0",
             "name": "amount",
             "html_type": "text",
-            "mysql_type": "int",
+            "mysql_type": "decimal",
             "view_side": "both",
             "index": "",
             "id_name": "",
@@ -217,17 +204,13 @@
             "readonly": "0",
             "format_value": "",
             "parameters": {
-                "general": [
-                ],
-                "source": [
-                ],
+                "general": [],
+                "source": [],
                 "save": {
                     "index": ""
                 },
-                "media": [
-                ],
-                "payment": [
-                ]
+                "media": [],
+                "payment": []
             }
         },
         {
@@ -245,17 +228,13 @@
             "readonly": "0",
             "format_value": "",
             "parameters": {
-                "general": [
-                ],
-                "source": [
-                ],
+                "general": [],
+                "source": [],
                 "save": {
                     "index": ""
                 },
-                "media": [
-                ],
-                "payment": [
-                ]
+                "media": [],
+                "payment": []
             }
         },
         {
@@ -277,15 +256,12 @@
                     "col": "",
                     "row": ""
                 },
-                "source": [
-                ],
+                "source": [],
                 "save": {
                     "index": ""
                 },
-                "media": [
-                ],
-                "payment": [
-                ]
+                "media": [],
+                "payment": []
             }
         },
         {
@@ -303,17 +279,13 @@
             "readonly": "0",
             "format_value": "",
             "parameters": {
-                "general": [
-                ],
-                "source": [
-                ],
+                "general": [],
+                "source": [],
                 "save": {
                     "index": ""
                 },
-                "media": [
-                ],
-                "payment": [
-                ]
+                "media": [],
+                "payment": []
             }
         },
         {
@@ -331,17 +303,13 @@
             "readonly": "0",
             "format_value": "",
             "parameters": {
-                "general": [
-                ],
-                "source": [
-                ],
+                "general": [],
+                "source": [],
                 "save": {
                     "index": ""
                 },
-                "media": [
-                ],
-                "payment": [
-                ]
+                "media": [],
+                "payment": []
             }
         },
         {
@@ -359,17 +327,13 @@
             "readonly": "0",
             "format_value": "",
             "parameters": {
-                "general": [
-                ],
-                "source": [
-                ],
+                "general": [],
+                "source": [],
                 "save": {
                     "index": ""
                 },
-                "media": [
-                ],
-                "payment": [
-                ]
+                "media": [],
+                "payment": []
             }
         },
         {
@@ -387,17 +351,13 @@
             "readonly": "0",
             "format_value": "",
             "parameters": {
-                "general": [
-                ],
-                "source": [
-                ],
+                "general": [],
+                "source": [],
                 "save": {
                     "index": ""
                 },
-                "media": [
-                ],
-                "payment": [
-                ]
+                "media": [],
+                "payment": []
             }
         },
         {
@@ -415,8 +375,7 @@
             "readonly": "0",
             "format_value": "",
             "parameters": {
-                "general": [
-                ],
+                "general": [],
                 "source": {
                     "data_source": "db_table",
                     "join_field": "id",
@@ -428,10 +387,8 @@
                 "save": {
                     "index": ""
                 },
-                "media": [
-                ],
-                "payment": [
-                ]
+                "media": [],
+                "payment": []
             }
         },
         {
@@ -449,17 +406,13 @@
             "readonly": "",
             "format_value": "",
             "parameters": {
-                "general": [
-                ],
-                "source": [
-                ],
+                "general": [],
+                "source": [],
                 "save": {
                     "index": ""
                 },
-                "media": [
-                ],
-                "payment": [
-                ]
+                "media": [],
+                "payment": []
             }
         },
         {
@@ -477,8 +430,7 @@
             "readonly": "0",
             "format_value": "",
             "parameters": {
-                "general": [
-                ],
+                "general": [],
                 "source": {
                     "data_source": "db_table",
                     "join_field": "id",
@@ -490,10 +442,8 @@
                 "save": {
                     "index": ""
                 },
-                "media": [
-                ],
-                "payment": [
-                ]
+                "media": [],
+                "payment": []
             }
         },
         {
@@ -511,29 +461,24 @@
             "readonly": "",
             "format_value": "",
             "parameters": {
-                "general": [
-                ],
-                "source": [
-                ],
+                "general": [],
+                "source": [],
                 "save": {
                     "index": ""
                 },
-                "media": [
-                ],
-                "payment": [
-                ]
+                "media": [],
+                "payment": []
             }
         }
     ],
     "primarykey": "id",
     "table_name": "withdraws_withdraws",
-    "table_alias": "fw",
+    "table_alias": "ww",
     "foreignkey": "",
     "renamedfields": "",
     "main_fields": [
         "user_id",
-        "gateway_id",
-        "amount"
+        "gateway_id"
     ],
     "main_view": "table",
     "has_view": "1",
@@ -546,53 +491,53 @@
     "query": {
         "from": {
             "table": "Withdraws\\Withdraws\\Code\\Tables\\Withdraws",
-            "alias": "fw",
+            "alias": "ww",
             "name": "#__withdraws_withdraws"
         },
         "select": [
-            "fw.id",
-            "fw.user_id",
+            "ww.id",
+            "ww.user_id",
             "uu.name AS user_id_name",
-            "fw.gateway_id",
-            "fg.long_name AS gateway_id_long_name",
-            "fw.amount",
-            "fw.currency",
-            "fw.description",
-            "fw.paid_status",
-            "fw.is_canceled",
-            "fw.token",
-            "fw.params",
-            "fw.created_by",
-            "uu_403.name AS created_by_name",
-            "fw.date_created",
-            "fw.modified_by",
-            "uu_9387.name AS modified_by_name",
-            "fw.date_modified"
+            "ww.gateway_id",
+            "pg.long_name AS gateway_id_long_name",
+            "ww.amount",
+            "ww.currency",
+            "ww.description",
+            "ww.paid_status",
+            "ww.is_canceled",
+            "ww.token",
+            "ww.params",
+            "ww.created_by",
+            "uu_631.name AS created_by_name",
+            "ww.date_created",
+            "ww.modified_by",
+            "uu_7020.name AS modified_by_name",
+            "ww.date_modified"
         ],
         "leftjoin": [
             {
                 "table": "Users\\Users\\Code\\Tables\\Users",
                 "alias": "uu",
                 "name": "#__users_users",
-                "on": "fw.user_id = uu.id"
+                "on": "ww.user_id = uu.id"
             },
             {
-                "table": "Withdraws\\Gateways\\Code\\Tables\\Gateways",
-                "alias": "fg",
+                "table": "Payments\\Gateways\\Code\\Tables\\Gateways",
+                "alias": "pg",
                 "name": "#__payments_gateways",
-                "on": "fw.gateway_id = fg.id"
+                "on": "ww.gateway_id = pg.id"
             },
             {
                 "table": "Users\\Users\\Code\\Tables\\Users",
-                "alias": "uu_403",
+                "alias": "uu_631",
                 "name": "#__users_users",
-                "on": "fw.created_by = uu_403.id"
+                "on": "ww.created_by = uu_631.id"
             },
             {
                 "table": "Users\\Users\\Code\\Tables\\Users",
-                "alias": "uu_9387",
+                "alias": "uu_7020",
                 "name": "#__users_users",
-                "on": "fw.modified_by = uu_9387.id"
+                "on": "ww.modified_by = uu_7020.id"
             }
         ]
     }

@@ -53,6 +53,7 @@ class WithdrawsModel extends BaseModel {
 
         $form = $this->request->get('form');
 
+        $amount_withdrawn = $form['amount'];
         if (!WEB_IS_ADMIN) {
 
             $url = $this->generateUrl('withdraws.withdraws');
@@ -68,16 +69,20 @@ class WithdrawsModel extends BaseModel {
         $params = array_reverse($params);
         $total_param = $params[0];
 
-        if ($total_param->amount > $total_amount) {
+        if ($form['amount'] > $total_amount) {
             $factory->enqueueMessage('Amount to be withdrawn (' . $total_param->amount . ') is more than Available Amount (' . $total_amount . ')');
             return false;
+        }
+
+        if ($form['amount'] != $total_param->amount) {
+            $form['amount'] = $total_param->amount;
         }
 
         $withdraw_id = parent::save($form);
 
         if ($withdraw_id) {
             $this->sendEmail($user, $withdraw_id);
-            $this->getDeductCommission($user, $withdraw_id, $params);
+            $this->getDeductCommission($user, $withdraw_id, $params, $amount_withdrawn);
         }
 
         return $withdraw_id;
@@ -95,31 +100,33 @@ class WithdrawsModel extends BaseModel {
         $email->sendDefinedLayoutEmail('withdraws.withdraws.fundwithdraw', $tmp_array['user']->email, $tmp_array);
     }
 
-    public function getDeductCommission($user, $withdraw_id, $params) {
+    public function getDeductCommission($user, $withdraw_id, $params, $amount_withdrawn) {
 
         $factory = new KazistFactory();
 
         $parent_id = '';
 
-        $params = array_reverse($params);
+        // $params = array_reverse($params);
 
         if (!empty($params)) {
             foreach ($params as $key => $param) {
+                if (count($params) == 1 || (int) $param->amount != (int) $amount_withdrawn) {
 
-                $data_obj = new \stdClass();
-                $data_obj->user_id = $user->id;
-                $data_obj->behalf_user_id = $user->id;
-                $data_obj->description = ($key) ? $param->title . ' For ' . $parent_id : 'Fund Withdrawal To ' . $user->username;
-                $data_obj->item_id = $withdraw_id;
-                $data_obj->rate_id = $param->id;
-                $data_obj->payment_source = 'withdraws.withdraws';
-                $data_obj->debit = $param->amount;
-                $data_obj->type = 'fund-withdraw';
+                    $data_obj = new \stdClass();
+                    $data_obj->user_id = $user->id;
+                    $data_obj->behalf_user_id = $user->id;
+                    $data_obj->description = ($param->title != 'Total') ? $param->title . ' For ' . $parent_id : 'Fund Withdrawal To ' . $user->username;
+                    $data_obj->item_id = $withdraw_id;
+                    $data_obj->rate_id = $param->id;
+                    $data_obj->payment_source = 'withdraws.withdraws';
+                    $data_obj->debit = abs($param->amount);
+                    $data_obj->type = 'fund-withdraw';
 
-                $id = $factory->saveRecord('#__payments_transactions', $data_obj);
+                    $id = $factory->saveRecord('#__payments_transactions', $data_obj);
 
-                if (!$key) {
-                    $parent_id = $id;
+                    if ($param->title == 'Total') {
+                        $parent_id = $id;
+                    }
                 }
             }
         }
@@ -178,8 +185,8 @@ class WithdrawsModel extends BaseModel {
         $query->where('pt.user_id = :user_id');
         $query->setParameter('user_id', (int) $user->id);
         $record = $query->loadObject();
- 
-        return $record->credit-$record->debit;
+
+        return $record->credit - $record->debit;
     }
 
     public function getWithdrawGateways($user = '') {

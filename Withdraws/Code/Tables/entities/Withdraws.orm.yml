@@ -17,9 +17,10 @@ Withdraws\Withdraws\Code\Tables\Withdraws:
       length: 11
       nullable: false
     amount:
+      scale: 2
+      precision: 11
       name: amount
-      type: integer
-      length: 11
+      type: decimal
       nullable: false
     currency:
       name: currency

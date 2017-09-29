@@ -164,10 +164,10 @@ class MasspayModel extends BaseModel {
         $factory = new KazistFactory();
 
         $query = $factory->getQueryBuilder('#__withdraws_settings_gateways', 'wsg');
-        $query->addSelect('pg.short_name, pg.long_name, ws.pin, ws.id_passport ');
-        $query->where('wsg.user_id=:user_id');
+        $query->addSelect('pg.short_name, pg.long_name, ws.pin, ws.id_passport');
+        $query->andWhere('wsg.user_id=:user_id');
         $query->setParameter('user_id', (int) $user_id);
-        $query->where('wsg.gateway_id=:gateway_id');
+        $query->andWhere('wsg.gateway_id=:gateway_id');
         $query->setParameter('gateway_id', (int) $gateway_id);
         $record = $query->loadObject();
 

@@ -1,5 +1,8 @@
 {% import "form.macro.twig" as forms %}
 
+{% set allowed_country = get_setting('withdraws_setting_country') %}
+{% set pin_text = get_setting('withdraws_setting_pin_text') %}
+
 <h1 class="component-header"> Edit Withdraws</h1>
 
 
@@ -8,17 +11,20 @@
     <div class="well well-sm"> Withdraws Detail</div>
     <div>
         <div class="col-md-9">
+            {% if not allowed_country or user.country_id == allowed_country  %}
 
-            {% if item.pin == '' %}
-                {{ forms.input('pin', 'text', item.pin, 'Pin')  }}
-            {% else %}
-                {{ forms.input('pin', 'text', item.pin, 'Pin', null, null, 'readonly="readonly"')  }}
-            {% endif %}
+                {% if item.pin == '' %}
+                    {{ forms.input('pin', 'text', item.pin, pin_text)  }}
+                {% else %}
+                    {{ forms.input('pin', 'text', item.pin, pin_text, null, null, 'readonly="readonly"')  }}
+                {% endif %}
 
-            {% if item.id_passport == '' %}
-                {{ forms.input('id_passport', 'text', item.id_passport, 'Id or Passport')  }}
-            {% else %}
-                {{ forms.input('id_passport', 'text', item.id_passport, 'Id or Passport', null, null, 'readonly="readonly"')  }}
+                {% if item.id_passport == '' %}
+                    {{ forms.input('id_passport', 'text', item.id_passport, 'Id or Passport')  }}
+                {% else %}
+                    {{ forms.input('id_passport', 'text', item.id_passport, 'Id or Passport', null, null, 'readonly="readonly"')  }}
+                {% endif %}
+
             {% endif %}
 
         </div>

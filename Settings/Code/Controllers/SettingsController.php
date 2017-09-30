@@ -17,20 +17,25 @@ namespace Withdraws\Settings\Code\Controllers;
 
 defined('KAZIST') or exit('Not Kazist Framework');
 
+use Kazist\KazistFactory;
 use Kazist\Controller\BaseController;
 
 class SettingsController extends BaseController {
 
     public function addAction() {
 
+        $factory = new KazistFactory();
+
         $setting_id = $this->model->getWithdrawSetting();
-     
+
         if ($setting_id) {
             return $this->redirectToRoute('withdraws.settings.edit', array('id' => $setting_id));
         }
 
+        $user = $factory->getUser();
         $gateways = $this->model->getWithdrawGateways();
 
+        $this->data_arr['user'] = $user;
         $this->data_arr['gateways'] = $gateways;
 
         return parent::addAction();

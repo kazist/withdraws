@@ -15,6 +15,30 @@
                     "default": "10",
                     "tooltip": "Set amount to be withheld on every withdraw.",
                     "type": "text"
+                }, {
+                    "name": "withdraws_setting_pin_text",
+                    "label": "Setting Pin",
+                    "default": "Pin",
+                    "tooltip": "Set Setting Pin text.",
+                    "type": "text"
+                }, {
+                    "name": "withdraws_setting_country",
+                    "label": "Withdraw Setting Country",
+                    "default": "",
+                    "tooltip": "Set Withdraw Setting Country.",
+                    "type": "select",
+                    "source": {
+                        "custom": [{
+                                "value": "0",
+                                "text": "Default Country"
+                            }],
+                        "table": {
+                            "name": "#__setup_countries",
+                            "order": ["name ASC"],
+                            "value": "id",
+                            "text": "name"
+                        }
+                    }
                 }]
         }]
 }

@@ -1,8 +1,5 @@
 {% import "form.macro.twig" as forms %}
 
-{{ set_assets('applications/Withdraws/assets/js/withdraw.js') }}
-{{ set_assets('applications/Withdraws/assets/css/withdraw.css') }}
-
 <h1 class="component-header"> Edit Withdraws</h1>
 
 
@@ -21,97 +18,101 @@
             {% if item.id_passport == '' %}
                 {{ forms.input('id_passport', 'text', item.id_passport, 'Id or Passport')  }}
             {% else %}
-            {{ forms.input('id_passport', 'text', item.id_passport, 'Id or Passport', null, null, 'readonly="readonly"')  }}
+                {{ forms.input('id_passport', 'text', item.id_passport, 'Id or Passport', null, null, 'readonly="readonly"')  }}
             {% endif %}
 
-            </div>
         </div>
+    </div>
 
-        <div class="clearfix"></div>
-        <div class="well well-sm"> Payment Gateways Detail</div>
-        <div class="col-md-9">
-            <div class="form-group payment-gateways-group">
+    <div class="clearfix"></div>
+    <div class="well well-sm"> Payment Gateways Detail</div>
+    <div class="col-md-9">
+        <div class="form-group payment-gateways-group">
 
-                <label for="payment-gateways" class="col-sm-12">Payment Gateway</label>
+            <label for="payment-gateways" class="col-sm-12">Payment Gateway</label>
 
-                <div class="col-sm-12">
+            <div class="col-sm-12">
 
+                {% for gateway in gateways %}
+                    <input class="selected_gateways" type="checkbox" name="form[selected_gateways][]" value="{{ gateway.id }}" short_name="{{ gateway.short_name }}" {% if gateway.selected %}checked="checked"{% endif %}>
+                    {{ gateway.long_name }}
+                {% endfor %}
+
+                <div class="payment-gateways">
                     {% for gateway in gateways %}
-                        <input class="selected_gateways" type="checkbox" name="form[selected_gateways][]" value="{{ gateway.id }}" short_name="{{ gateway.short_name }}" {% if gateway.selected %}checked="checked"{% endif %}>
-                        {{ gateway.long_name }}
-                    {% endfor %}
+                        <div class="payment-gateway gateway-{{ gateway.short_name }}" {% if not gateway.selected %}style="display:none;"{% endif %}> 
+                            <h4>{{ gateway.long_name }}</h4>
+                            {% for setting in gateway.params %}
+                                <div class="form-group {{ setting.name }}-group">
 
-                    <div class="payment-gateways">
-                        {% for gateway in gateways %}
-                            <div class="payment-gateway gateway-{{ gateway.short_name }}" {% if not gateway.selected %}style="display:none;"{% endif %}> 
-                                <h4>{{ gateway.long_name }}</h4>
-                                {% for setting in gateway.params %}
-                                    <div class="form-group {{ setting.name }}-group">
+                                    {% set param_field_name = 'gateways.' ~ gateway.id ~ '.params.' ~ setting.name %}
 
-                                        {% set param_field_name = 'gateways.' ~ gateway.id ~ '.params.' ~ setting.name %}
-
-                                        <div class="col-sm-12">
-                                            <label for="{{ setting.name }}" class="col-sm-3">{{ setting.label }}</label>
-                                            <div class="col-sm-9 kazicode-form-field ">
-                                                {{ forms.input(param_field_name , setting.type, setting.value, null, null, null, null, null, setting.options) }}
-                                                {% if setting.tooltip %}
-                                                    <i class="fa fa-info-circle"></i>
+                                    <div class="col-sm-12">
+                                        <label for="{{ setting.name }}" class="col-sm-3">{{ setting.label }}</label>
+                                        <div class="col-sm-9 kazicode-form-field ">
+                                            {{ forms.input(param_field_name , setting.type, setting.value, null, null, null, null, null, setting.options) }}
+                                            {% if setting.tooltip %}
+                                                <i class="fa fa-info-circle"></i>
+                                                {% if setting.tooltip_setting %}
+                                                    {{ get_setting('kopokopo_payments_tooltip_instructions')|raw }}
+                                                {% else %}
                                                     <small>{{ setting.tooltip|raw }}</small>
                                                 {% endif %}
-                                            </div>
+                                            {% endif %}
                                         </div>
-
                                     </div>
-                                {% endfor %}
-                            </div>
-                        {% endfor %}
-                    </div>
+
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>
+    </div>
 
 
-        <div class="clearfix"></div>
+    <div class="clearfix"></div>
 
-        {{ forms.input('id', 'hidden', item.id, 'Id')  }}
+    {{ forms.input('id', 'hidden', item.id, 'Id')  }}
 
-        <div class="withdraw-instructions bg-red text-center">
-            <b>NOTE:</b> Record Once submited will only be modified by Administrator.<br>
-            <a class="btn btn-warning" href="{{  generate_url('tickets.tickets.add') }}">
-                <i class="fa fa-support"></i>
-                Contact Administrator
-            </a>
-        </div>
-        <br>
+    <div class="withdraw-instructions bg-red text-center">
+        <b>NOTE:</b> Record Once submited will only be modified by Administrator.<br>
+        <a class="btn btn-warning" href="{{  generate_url('tickets.tickets.add') }}">
+            <i class="fa fa-support"></i>
+            Contact Administrator
+        </a>
+    </div>
+    <br>
 
-        <div class="text-center registration-buttons">
-            <input class="btn btn-success btn-sm" type="submit" name="submit" value="Update Detail" />
-            <a class="btn btn-danger btn-sm">Cancel</a> 
-        </div>
+    <div class="text-center registration-buttons">
+        <input class="btn btn-success btn-sm" type="submit" name="submit" value="Update Detail" />
+        <a class="btn btn-danger btn-sm">Cancel</a> 
+    </div>
 
-        {{ forms.input('_token' ) }} 
+    {{ forms.input('_token' ) }} 
 
-    </form>
+</form>
 
-    <script>
+<script>
 
-        jQuery(document).ready(function () {
+    jQuery(document).ready(function () {
 
-            jQuery('input.selected_gateways').click(function () {
+        jQuery('input.selected_gateways').click(function () {
 
-                var gateway_short_name = jQuery(this).attr('short_name');
-                processGateway(gateway_short_name);
-
-            });
+            var gateway_short_name = jQuery(this).attr('short_name');
+            processGateway(gateway_short_name);
 
         });
 
+    });
 
-        function processGateway(gateway_short_name) {
-            jQuery('.gateway-' + gateway_short_name).toggle();
-        }
 
-    </script>
+    function processGateway(gateway_short_name) {
+        jQuery('.gateway-' + gateway_short_name).toggle();
+    }
+
+</script>
 
 
 

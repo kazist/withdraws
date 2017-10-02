@@ -261,7 +261,7 @@ class WithdrawsModel extends BaseModel {
 
         $id = $this->request->get('id');
 
-        $transactionModel->reverseTransaction($id, 'withdraw');
+        $transactionModel->reverseTransaction($id, 'withdraws.withdraws');
 
         $data_obj = new \stdClass();
         $data_obj->id = $id;

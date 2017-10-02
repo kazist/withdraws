@@ -3,15 +3,15 @@
 {% set allowed_country = get_setting('withdraws_setting_country') %}
 {% set pin_text = get_setting('withdraws_setting_pin_text') %}
 
-<h1 class="component-header"> Edit Withdraws</h1>
+<h1 class="component-header"> Edit Withdraw Settings</h1>
 
 
 <form id="{{ main_form_id }}" class="form-horizontal" action="{{ generate_url('withdraws.settings.save') }}" method="post" role="form"  enctype="multipart/form-data">
 
-    <div class="well well-sm"> Withdraws Detail</div>
-    <div>
-        <div class="col-md-9">
-            {% if not allowed_country or user.country_id == allowed_country  %}
+    {% if not allowed_country or user.country_id == allowed_country  %}
+        <div class="well well-sm"> Withdraws Detail</div>
+        <div>
+            <div class="col-md-9">
 
                 {% if item.pin == '' %}
                     {{ forms.input('pin', 'text', item.pin, pin_text)  }}
@@ -25,10 +25,10 @@
                     {{ forms.input('id_passport', 'text', item.id_passport, 'Id or Passport', null, null, 'readonly="readonly"')  }}
                 {% endif %}
 
-            {% endif %}
 
+            </div>
         </div>
-    </div>
+    {% endif %}
 
     <div class="clearfix"></div>
     <div class="well well-sm"> Payment Gateways Detail</div>
@@ -56,7 +56,12 @@
                                     <div class="col-sm-12">
                                         <label for="{{ setting.name }}" class="col-sm-3">{{ setting.label }}</label>
                                         <div class="col-sm-9 kazicode-form-field ">
-                                            {{ forms.input(param_field_name , setting.type, setting.value, null, null, null, null, null, setting.options) }}
+                                            
+                                            {% if setting.value %}
+                                                {% set setting_readonly = 'readonly="readonly"' %}
+                                            {% endif %}
+                                            
+                                            {{ forms.input(param_field_name , setting.type, setting.value, null, null, null, setting_readonly, null, setting.options) }}
                                             {% if setting.tooltip %}
                                                 <i class="fa fa-info-circle"></i>
                                                 {% if setting.tooltip_setting %}

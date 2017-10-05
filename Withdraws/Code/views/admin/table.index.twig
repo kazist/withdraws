@@ -46,7 +46,19 @@
                                 </ul>
                             </td>
 
-                            <td>{{ item.user_id_name }}</td>
+                            <td>
+                                {{ item.user_id_name }}({{ item.user_id_username }})
+                                <div class="dropdown affiliate-email-dropdown">
+                                    <a class= dropdown-toggle" data-toggle="dropdown" href="#" title="More Actions"> 
+                                        <span class="affiliate-email">{{ item.user_id_email }}</span> 
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li class="dropdown-header">
+                                            <input type="text" name="none" value="{{ item.user_id_email }}">
+                                        </li>
+                                    </ul>
+                                </div>
+                            </td>
                             <td>{{ item.gateway_id_long_name }}</td>
                             <td class="text-center">
                                 {% if item.paid_status %}

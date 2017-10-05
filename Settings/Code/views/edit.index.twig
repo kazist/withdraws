@@ -61,7 +61,6 @@
                                                 {% set setting_readonly = 'readonly="readonly"' %}
                                             {% endif %}
                                             
-                                            {{ forms.input(param_field_name , setting.type, setting.value, null, null, null, setting_readonly, null, setting.options) }}
                                             {% if setting.tooltip %}
                                                 <i class="fa fa-info-circle"></i>
                                                 {% if setting.tooltip_setting %}
@@ -70,6 +69,8 @@
                                                     <small>{{ setting.tooltip|raw }}</small>
                                                 {% endif %}
                                             {% endif %}
+                                            
+                                            {{ forms.input(param_field_name , setting.type, setting.value, null, null, null, setting_readonly, null, setting.options) }}
                                         </div>
                                     </div>
 

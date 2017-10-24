@@ -16,6 +16,12 @@
                     "tooltip": "Set amount to be withheld on every withdraw.",
                     "type": "text"
                 }, {
+                    "name": "withdraws_hide_government_pin",
+                    "label": "Hide Government Pin",
+                    "default": "0",
+                    "tooltip": "Show/Hide Government Pin",
+                    "type": "yesno"
+                }, {
                     "name": "withdraws_setting_pin_text",
                     "label": "Setting Pin",
                     "default": "Pin",

@@ -13,10 +13,12 @@
         <div>
             <div class="col-md-9">
 
-                {% if item.pin == '' %}
-                    {{ forms.input('pin', 'text', item.pin, pin_text)  }}
-                {% else %}
-                    {{ forms.input('pin', 'text', item.pin, pin_text, null, null, 'readonly="readonly"')  }}
+                {% if get_setting('withdraws_hide_government_pin')  %}
+                    {% if item.pin == ''  %}
+                        {{ forms.input('pin', 'text', item.pin, pin_text)  }}
+                    {% else %}
+                        {{ forms.input('pin', 'text', item.pin, pin_text, null, null, 'readonly="readonly"')  }}
+                    {% endif %}
                 {% endif %}
 
                 {% if item.id_passport == '' %}
@@ -56,11 +58,11 @@
                                     <div class="col-sm-12">
                                         <label for="{{ setting.name }}" class="col-sm-3">{{ setting.label }}</label>
                                         <div class="col-sm-9 kazicode-form-field ">
-                                            
+
                                             {% if setting.value %}
                                                 {% set setting_readonly = 'readonly="readonly"' %}
                                             {% endif %}
-                                            
+
                                             {% if setting.tooltip %}
                                                 <i class="fa fa-info-circle"></i>
                                                 {% if setting.tooltip_setting %}
@@ -69,7 +71,7 @@
                                                     <small>{{ setting.tooltip|raw }}</small>
                                                 {% endif %}
                                             {% endif %}
-                                            
+
                                             {{ forms.input(param_field_name , setting.type, setting.value, null, null, null, setting_readonly, null, setting.options) }}
                                         </div>
                                     </div>

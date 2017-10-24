@@ -4,7 +4,7 @@
     "keywords": ["kazist", "withdraw manager"],
     "homepage": "https://github.com/kazist/withdraws",
     "license": "LGPL-3.0",
-    "version": "1.0.26",
+    "version": "1.0.27",
     "authors": [
         {
             "name": "Dedan Irungu",

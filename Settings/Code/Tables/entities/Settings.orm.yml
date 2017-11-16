@@ -15,12 +15,12 @@ Withdraws\Settings\Code\Tables\Settings:
       name: id_passport
       type: string
       length: 255
-      nullable: false
+      nullable: true
     pin:
       name: pin
       type: string
       length: 255
-      nullable: false
+      nullable: true
     created_by:
       name: created_by
       type: integer
@@ -42,6 +42,10 @@ Withdraws\Settings\Code\Tables\Settings:
   indexes:
     user_id_index:
       columns: [user_id]
+    created_by_index:
+      columns: [created_by]
+    modified_by_index:
+      columns: [modified_by]
   lifecycleCallbacks:
     prePersist:
       - onPrePersist

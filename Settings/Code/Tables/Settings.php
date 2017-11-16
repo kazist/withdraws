@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Settings
  *
- * @ORM\Table(name="withdraws_settings", indexes={@ORM\Index(name="user_id_index", columns={"user_id"})})
+ * @ORM\Table(name="withdraws_settings", indexes={@ORM\Index(name="user_id_index", columns={"user_id"}), @ORM\Index(name="created_by_index", columns={"created_by"}), @ORM\Index(name="modified_by_index", columns={"modified_by"})})
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks
  */
@@ -32,14 +32,14 @@ class Settings extends \Kazist\Table\BaseTable
     /**
      * @var string
      *
-     * @ORM\Column(name="id_passport", type="string", length=255, nullable=false)
+     * @ORM\Column(name="id_passport", type="string", length=255, nullable=true)
      */
     protected $id_passport;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="pin", type="string", length=255, nullable=false)
+     * @ORM\Column(name="pin", type="string", length=255, nullable=true)
      */
     protected $pin;
 

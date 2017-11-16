@@ -9,7 +9,10 @@
 <form id="{{ main_form_id }}" class="form-horizontal" action="{{ generate_url('withdraws.settings.save') }}" method="post" role="form"  enctype="multipart/form-data">
 
     {% if not allowed_country or user.country_id == allowed_country  %}
-        <div class="well well-sm"> Withdraws Detail</div>
+        
+        {% if get_setting('withdraws_hide_government_pin') or get_setting('withdraws_hide_id_passport')  %}
+            <div class="well well-sm"> Withdraws Detail</div>
+        {% endif %}
         <div>
             <div class="col-md-9">
 
@@ -21,10 +24,12 @@
                     {% endif %}
                 {% endif %}
 
-                {% if item.id_passport == '' %}
-                    {{ forms.input('id_passport', 'text', item.id_passport, 'Id or Passport')  }}
-                {% else %}
-                    {{ forms.input('id_passport', 'text', item.id_passport, 'Id or Passport', null, null, 'readonly="readonly"')  }}
+                {% if get_setting('withdraws_hide_id_passport')  %}
+                    {% if item.id_passport == '' %}
+                        {{ forms.input('id_passport', 'text', item.id_passport, 'Id or Passport')  }}
+                    {% else %}
+                        {{ forms.input('id_passport', 'text', item.id_passport, 'Id or Passport', null, null, 'readonly="readonly"')  }}
+                    {% endif %}
                 {% endif %}
 
 

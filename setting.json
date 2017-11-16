@@ -22,6 +22,12 @@
                     "tooltip": "Show/Hide Government Pin",
                     "type": "yesno"
                 }, {
+                    "name": "withdraws_hide_id_passport",
+                    "label": "Hide Id or Passport",
+                    "default": "0",
+                    "tooltip": "Show/Hide Id or Passport",
+                    "type": "yesno"
+                }, {
                     "name": "withdraws_setting_pin_text",
                     "label": "Setting Pin",
                     "default": "Pin",

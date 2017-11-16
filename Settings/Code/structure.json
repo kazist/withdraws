@@ -20,7 +20,8 @@
                                                 "user_id",
                                                 "id_passport",
                                                 "pin",
-                                                "payment_gateways"
+                                                "payment_gateways",
+                                                "params"
                                             ]
                                         }
                                     }
@@ -141,7 +142,7 @@
         },
         {
             "dropdown_filter": "0",
-            "nullable": "0",
+            "nullable": "1",
             "name": "id_passport",
             "html_type": "text",
             "mysql_type": "varchar",
@@ -166,7 +167,7 @@
         },
         {
             "dropdown_filter": "0",
-            "nullable": "0",
+            "nullable": "1",
             "name": "pin",
             "html_type": "text",
             "mysql_type": "varchar",
@@ -177,6 +178,27 @@
             "default_value": "",
             "size": "",
             "readonly": "0",
+            "format_value": "",
+            "parameters": {
+                "general": [],
+                "source": [],
+                "save": {
+                    "view_side": "both",
+                    "index": ""
+                },
+                "media": [],
+                "payment": []
+            }
+        },
+        {
+            "name": "params",
+            "html_type": "text",
+            "mysql_type": "none",
+            "view_side": "",
+            "index": "",
+            "size": "",
+            "readonly": "0",
+            "default_value": "",
             "format_value": "",
             "parameters": {
                 "general": [],
@@ -214,6 +236,7 @@
                     "join_table_name": "users_users"
                 },
                 "save": {
+                    "view_side": "both",
                     "index": ""
                 },
                 "media": [],
@@ -270,6 +293,7 @@
                     "join_table_name": "users_users"
                 },
                 "save": {
+                    "view_side": "both",
                     "index": ""
                 },
                 "media": [],
@@ -331,8 +355,10 @@
             "ws.id_passport",
             "ws.pin",
             "ws.created_by",
+            "uu_8816.name AS created_by_name",
             "ws.date_created",
             "ws.modified_by",
+            "uu_5822.name AS modified_by_name",
             "ws.date_modified"
         ],
         "leftjoin": [
@@ -341,6 +367,18 @@
                 "alias": "uu",
                 "name": "#__users_users",
                 "on": "ws.user_id = uu.id"
+            },
+            {
+                "table": "Users\\Users\\Code\\Tables\\Users",
+                "alias": "uu_8816",
+                "name": "#__users_users",
+                "on": "ws.created_by = uu_8816.id"
+            },
+            {
+                "table": "Users\\Users\\Code\\Tables\\Users",
+                "alias": "uu_5822",
+                "name": "#__users_users",
+                "on": "ws.modified_by = uu_5822.id"
             }
         ]
     }

@@ -20,5 +20,21 @@ defined('KAZIST') or exit('Not Kazist Framework');
 use Kazist\Controller\BaseController;
 
 class SettingsController extends BaseController {
-    
+
+    public function addAction($id = '') {
+        
+        $gateways = $this->model->getWithdrawGateways();
+        $this->data_arr['gateways'] = $gateways;
+
+        return parent::addAction($id);
+    }
+
+    public function editAction($id = '') {
+        
+        $gateways = $this->model->getWithdrawGateways();
+        $this->data_arr['gateways'] = $gateways;
+      
+        return parent::editAction($id);
+    }
+
 }

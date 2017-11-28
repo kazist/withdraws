@@ -48,6 +48,7 @@ class SettingsController extends BaseController {
             return $this->redirectToRoute('withdraws.settings.edit', array('id' => $setting_id));
         }
 
+
         $gateways = $this->model->getWithdrawGateways();
 
         $this->data_arr['gateways'] = $gateways;

@@ -24,6 +24,7 @@ class SettingsController extends BaseController {
     public function addAction($id = '') {
         
         $gateways = $this->model->getWithdrawGateways();
+        
         $this->data_arr['gateways'] = $gateways;
 
         return parent::addAction($id);
@@ -31,7 +32,10 @@ class SettingsController extends BaseController {
 
     public function editAction($id = '') {
         
-        $gateways = $this->model->getWithdrawGateways();
+        $item = $this->model->getRecord($id);
+      
+        $gateways = $this->model->getWithdrawGateways($item->user_id);
+       
         $this->data_arr['gateways'] = $gateways;
       
         return parent::editAction($id);

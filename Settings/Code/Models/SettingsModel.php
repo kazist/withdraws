@@ -42,35 +42,42 @@ class SettingsModel extends BaseModel {
         return $record->id;
     }
 
-    public function getWithdrawGateways() {
+    public function getWithdrawGateways($user_id = '') {
 
         $factory = new KazistFactory();
         $paymentsModel = new PaymentsModel();
 
-        $user = $factory->getUser();
+        if (!WEB_IS_ADMIN && !$user_id) {
+            $user = $factory->getUser();
+            $user_id = $user->id;
+        }
 
         $query = $factory->getQueryBuilder('#__payments_gateways', 'wg');
         $query->where('wg.can_withdraw=1');
         $records = $query->loadObjectList();
- 
-        foreach ($records as $key => $record) {
 
-            $is_allowed = $paymentsModel->getIsAllowedInCountry($record->id);
-            $is_notallowed = $paymentsModel->getIsNotAllowedInCountry($record->id);
-            $count_allowed = $paymentsModel->getCountIsAllowedIn($record->id);
+        foreach ($records as $key => $record) {
+            
+            if (!WEB_IS_ADMIN) {
+                $is_allowed = $paymentsModel->getIsAllowedInCountry($record->id);
+                $is_notallowed = $paymentsModel->getIsNotAllowedInCountry($record->id);
+                $count_allowed = $paymentsModel->getCountIsAllowedIn($record->id);
+
+
+                if (($count_allowed && !$is_allowed) || $is_notallowed) {
+                    unset($records[$key]);
+                }
+            }
 
             $param_json = JPATH_ROOT . 'applications/' . $record->form_path . '/param.json';
-           
-            if (($count_allowed && !$is_allowed) || $is_notallowed) {
-                unset($records[$key]);
-            }
 
             if (file_exists($param_json)) {
                 $params = json_decode(file_get_contents($param_json));
-                $records[$key] = $this->getWithdrawGatewaysUserParams($user->id, $record, $params);
+                $records[$key] = $this->getWithdrawGatewaysUserParams($user_id, $record, $params);
             } else {
                 unset($records[$key]);
             }
+         
         }
 
         return $records;
@@ -112,7 +119,13 @@ class SettingsModel extends BaseModel {
 
         $selected_gateways = $form_data['selected_gateways'];
         $gateways = $form_data['gateways'];
-        $form_data['user_id'] = $user->id;
+
+        if (!WEB_IS_ADMIN) {
+            $form_data['user_id'] = $user->id;
+        } elseif (WEB_IS_ADMIN && !$form_data['user_id']) {
+            $factory->enqueueMessage('User_id is not defined.');
+            return;
+        }
 
         unset($form_data['selected_gateways']);
         unset($form_data['gateways']);
@@ -125,7 +138,7 @@ class SettingsModel extends BaseModel {
                 $params_encode = json_encode($params);
 
                 $data = new \stdClass();
-                $data->user_id = $user->id;
+                $data->user_id = $form_data['user_id'];
                 $data->gateway_id = $gateway_id;
                 $data->setting_id = $id;
                 $exist_obj = clone $data;

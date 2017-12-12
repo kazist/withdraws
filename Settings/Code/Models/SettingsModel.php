@@ -77,6 +77,12 @@ class SettingsModel extends BaseModel {
             } else {
                 unset($records[$key]);
             }
+           
+            $gateway_js = JPATH_ROOT . 'applications/' . $record->form_path . '/script.js';
+
+            if (file_exists($gateway_js)) {
+                $record->script=1;
+            }
          
         }
 

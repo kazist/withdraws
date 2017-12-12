@@ -9,7 +9,7 @@
 <form id="{{ main_form_id }}" class="form-horizontal" action="{{ generate_url('withdraws.settings.save') }}" method="post" role="form"  enctype="multipart/form-data">
 
     {% if not allowed_country or user.country_id == allowed_country  %}
-        
+
         {% if get_setting('withdraws_hide_government_pin') or get_setting('withdraws_hide_id_passport')  %}
             <div class="well well-sm"> Withdraws Detail</div>
         {% endif %}
@@ -53,6 +53,11 @@
 
                 <div class="payment-gateways">
                     {% for gateway in gateways %}
+
+                        {% if gateway.script %}
+                            {{ set_assets('applications/' ~ gateway.form_path ~ '/script.js') }}
+                        {% endif %}
+
                         <div class="payment-gateway gateway-{{ gateway.short_name }}" {% if not gateway.selected %}style="display:none;"{% endif %}> 
                             <h4>{{ gateway.long_name }}</h4>
                             {% for setting in gateway.params %}
@@ -77,7 +82,7 @@
                                                 {% endif %}
                                             {% endif %}
 
-                                            {{ forms.input(param_field_name , setting.type, setting.value, null, null, null, setting_readonly, null, setting.options) }}
+                                            {{ forms.input(param_field_name , setting.type, setting.value, null, ' '~setting.class, null, setting_readonly, null, setting.options) }}
                                         </div>
                                     </div>
 

@@ -40,9 +40,10 @@ class WithdrawsModel extends BaseModel {
         $query = parent::getQueryBuilder('#__withdraws_withdraws', 'ww');
         $query->addSelect('uu.email AS user_id_email');
         $query->addSelect('uu.username AS user_id_username');
-        
+
         if ($user_id) {
-            $query->where('ww.user_id=' . $user_id);
+            $query->where('ww.user_id=:user_id');
+            $query->setParameter('user_id', (int) $user_id);
         }
 
         return $query;

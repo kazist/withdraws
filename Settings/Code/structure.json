@@ -79,7 +79,7 @@
             "name": "payment_gateways",
             "title": "Payment Gateways",
             "type": "module",
-            "description": "undefined"
+            "description": ""
         }
     ],
     "fields": [

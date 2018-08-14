@@ -26,7 +26,8 @@ class WithdrawsModel extends BaseModel {
 
     //put your code here
 
-    public function getQueryBuilder() {
+    public function appendSearchQuery($query)
+    {
 
         $factory = new KazistFactory();
         $user = $factory->getUser();
@@ -37,12 +38,13 @@ class WithdrawsModel extends BaseModel {
             $user_id = $user->id;
         }
 
-        $query = parent::getQueryBuilder('#__withdraws_withdraws', 'ww');
+        parent::appendSearchQuery($query);
+
         $query->addSelect('uu.email AS user_id_email');
         $query->addSelect('uu.username AS user_id_username');
 
         if ($user_id) {
-            $query->where('ww.user_id=:user_id');
+            $query->andWhere('ww.user_id=:user_id');
             $query->setParameter('user_id', (int) $user_id);
         }
 
